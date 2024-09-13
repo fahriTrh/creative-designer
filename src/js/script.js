@@ -4,6 +4,46 @@ window.addEventListener('mousemove', (e) => {
         top: () => e.clientY - 5,
         duration: .1
     })
+    gsap.to('.custom_cursor_wrap' , {
+        left: () => e.clientX - 30,
+        top: () => e.clientY - 30,
+        duration: .3
+    })
+})
+
+const hoverable_elements = ['.logo', '.menu']
+
+hoverable_elements.forEach(element => {
+
+    let el = document.querySelector(element)
+
+    el.addEventListener('mouseenter', function() {
+        gsap.to('.custom_cursor', {
+            scale: 6,
+            duration: .2,
+            ease: 'in',
+            delay: .1
+        })
+        gsap.to('.custom_cursor_wrap', {
+            scale: 0,
+            duration: .2,
+            ease: 'in',
+            delay: .1
+        })
+    })
+    el.addEventListener('mouseleave', function() {
+        gsap.to('.custom_cursor', {
+            scale: 1,
+            duration: .2,
+            ease: 'in'
+        })
+        gsap.to('.custom_cursor_wrap', {
+            scale: 1,
+            duration: .2,
+            ease: 'in',
+            delay: .1
+        })
+    })
 })
 
 // interactivity for logo
@@ -45,12 +85,6 @@ logo.addEventListener('mouseenter', () => {
         duration: .3,
         ease: 'power3.in'
     })
-
-    gsap.to('.custom_cursor', {
-        scale: 6,
-        duration: .3,
-        ease: 'in'
-    })
 })
 
 logo.addEventListener('mouseleave', () => {
@@ -76,10 +110,32 @@ logo.addEventListener('mouseleave', () => {
         duration: .3,
         ease: 'power3.in'
     })
-
-    gsap.to('.custom_cursor', {
-        scale: 1,
-        duration: .3,
-        ease: 'in'
-    })
 })
+// end interactivity for logo
+
+// interactivity for menu
+const menu = document.querySelector('.menu')
+const lines = menu.querySelectorAll('.line')
+
+menu.addEventListener('mouseenter', function() {
+    gsap.to(menu.querySelector('.wrap'), {
+        left: '20%',
+        right: '20%',
+        duration: .2,
+        ease: 'in',
+        backgroundColor: 'black' 
+    })
+    
+})
+
+menu.addEventListener('mouseleave', function() {
+    gsap.to(menu.querySelector('.wrap'), {
+        left: 0,
+        right: 0,
+        duration: .2,
+        ease: 'in',
+        backgroundColor: 'rgb(239, 236, 236)'
+    })
+    
+})
+// end interactivity for menu
