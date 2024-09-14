@@ -14,7 +14,6 @@
 
 :root {
     font-size: 10px;
-    transition: all .5s ease;
     cursor: none;
 }
 
@@ -102,6 +101,10 @@ nav .logo {
     padding-right: 4rem;
 }
 
+.logo .fancy {
+    font-size: 2rem;
+}
+
 .logo div {
     width: max-content;
     height: max-content;
@@ -135,7 +138,8 @@ main {
 }
 
 .hero_content {
-    
+    height: auto;
+    width: max-content;
 }
 
 .hero_content .hero_title {
@@ -146,6 +150,32 @@ main {
 .hero_title .fancy {
     font-size: clamp(11vw, 12vw, 13vw);
     word-spacing: 2vw;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+}
+
+.buttons button {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 1.3rem;
+    width: 13rem;
+    padding: 1.3rem 2.5rem;
+    border-radius: 2rem;
+    transition: all .3s ease-in;
+}
+
+.buttons .btn_second {
+    background: white;
+    border: 1px solid black;
+    color: black;
 }
 
 .custom_cursor_wrap {
@@ -170,10 +200,20 @@ main {
     z-index: 9999;
 }
 
+@media (min-width: 479px) {
+    .buttons {
+        flex-direction: row;
+    }
+}
+
 /* >576px */
 @media (min-width: 576px) {
     nav .logo {
         font-size: 2rem;
+    }
+
+    .logo .fancy {
+        font-size: 2.5rem;
     }
 
     nav .menu {
@@ -192,5 +232,44 @@ main {
 
     .hero_title .fancy {
         font-size: clamp(8vw, 9vw, 10vw);
+    }
+
+    .buttons {
+        gap: 0;
+    }
+
+    .buttons .line {
+        width: 8rem;
+        height: 1px;
+        background-color: #000;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero_content {
+        margin-top: 8vw;
+    }
+    .buttons button {
+        width: 15rem;
+    }
+    .buttons .line {
+        width: 10rem;
+        height: 1px;
+        background-color: #000;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero_content {
+        margin-top: 11vw;
+    }
+    .buttons button {
+        width: 17rem;
+        font-size: 1.4rem;
+    }
+    .buttons .line {
+        width: 13rem;
+        height: 1px;
+        background-color: #000;
     }
 }

@@ -11,7 +11,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['.logo', '.menu']
+const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second']
 
 hoverable_elements.forEach(element => {
 
@@ -115,7 +115,7 @@ logo.addEventListener('mouseleave', () => {
 
 // interactivity for menu
 const menu = document.querySelector('.menu')
-const lines = menu.querySelectorAll('.line')
+const lines = menu.querySelectorAll('.wrap .line')
 
 menu.addEventListener('mouseenter', function() {
     gsap.to(menu.querySelector('.wrap'), {
