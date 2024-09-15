@@ -159,6 +159,8 @@ main {
     justify-content: center;
     align-items: center;
     gap: .8rem;
+    position: relative;
+    /* background-color: salmon; */
 }
 
 .buttons button {
@@ -169,7 +171,7 @@ main {
     width: 13rem;
     padding: 1.3rem 2.5rem;
     border-radius: 2rem;
-    transition: all .3s ease-in;
+    /* transition: all .1s ease-in; */
 }
 
 .buttons .btn_second {
@@ -263,7 +265,7 @@ main {
     .hero_content {
         margin-top: 11vw;
     }
-    .buttons button {
+    /* .buttons button {
         width: 17rem;
         font-size: 1.4rem;
     }
@@ -271,5 +273,5 @@ main {
         width: 13rem;
         height: 1px;
         background-color: #000;
-    }
+    } */
 }

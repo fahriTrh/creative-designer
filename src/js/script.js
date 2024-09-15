@@ -139,3 +139,35 @@ menu.addEventListener('mouseleave', function() {
     
 })
 // end interactivity for menu
+
+
+// interactivity for hero buttons
+
+const buttons = document.querySelectorAll('.buttons button')
+
+buttons.forEach((button) => {
+    
+    const xTo = gsap.quickTo(button, 'x', {duration: 1, ease: 'elastic.out(1, 0.3)'})
+    const yTo = gsap.quickTo(button, 'y', {duration: 1, ease: 'elastic.out(1, 0.3)'})
+    
+    button.addEventListener('mousemove', function(e) {
+        let {clientX, clientY} = e
+        let {width, height, left, top} = button.getBoundingClientRect();
+        
+        let x = clientX - (left + width / 2)
+        let y = clientY - (top + height / 2)
+    
+        // gsap.to(button, {x, y})
+        xTo(x)
+        yTo(y)
+    })
+    
+    button.addEventListener('mouseleave', function() {
+        // gsap.to(button, {x: 0, y: 0})
+        xTo(0)
+        yTo(0)
+    })
+})
+
+
+// end interactivity for hero buttons
