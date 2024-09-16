@@ -22,7 +22,7 @@ body {
     font-family: 'Tenor Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
-    /* background: white; */
+    background-color: white;
 }
 
 .fancy {
@@ -35,6 +35,8 @@ header {
     height: auto;
     position: fixed;
     z-index: 888;
+    color: white;
+    mix-blend-mode: difference;
 }
 
 nav {
@@ -117,7 +119,8 @@ nav .logo {
     top: 60%;
     left: 0;
     height: 2px;
-    background: #000;
+    background: white;
+    mix-blend-mode: difference;
 }
 
 .logo div:nth-child(2) span {
@@ -152,11 +155,6 @@ nav .logo {
     top: 0;
     left: 0;
     right: 0;
-}
-
-.curve path {
-    fill: black !important;
-    mix-blend-mode: screen;
 }
 
 .hero_content {
