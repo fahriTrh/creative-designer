@@ -139,7 +139,7 @@ menu.addEventListener('mouseenter', function() {
         right: '20%',
         duration: .2,
         ease: 'in',
-        backgroundColor: 'black' 
+        backgroundColor: 'white' 
     })
     
 })
