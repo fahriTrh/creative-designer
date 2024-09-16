@@ -187,3 +187,41 @@ buttons.forEach((button) => {
 
 
 // end interactivity for hero buttons
+
+// interactivity for curve
+
+window.requestAnimationFrame(curvePosition)
+
+window.addEventListener('resize', () => {
+    curvePosition()
+})
+
+gsap.to(document.querySelector('.curve path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: '.curve',
+        start: 'top bottom',
+        end: 'bottom center',
+        scrub: true
+    }
+})
+
+function curvePosition() {
+    const section_two = document.querySelector('.section_two')
+    const curve = document.querySelector('.curve')
+
+    let section_two_height = section_two.getBoundingClientRect().height
+    let curve_height = curve.getBoundingClientRect().height
+
+    gsap.set(section_two, {
+        marginTop: curve_height
+    })
+    
+    gsap.set(curve, {
+        top: (curve_height - 10) * -1
+    })
+}
+// end interactivity for curve
