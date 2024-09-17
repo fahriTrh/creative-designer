@@ -211,7 +211,6 @@ function concavePosition() {
     const section_two = document.querySelector('.section_two')
     const concave = document.querySelector('.concave')
 
-    let section_two_height = section_two.getBoundingClientRect().height
     let concave_height = concave.getBoundingClientRect().height
 
     gsap.set(section_two, {
@@ -223,6 +222,36 @@ function concavePosition() {
     })
 }
 // end interactivity for concave
+
+// interactivity for convex
+
+window.requestAnimationFrame(convexPosition)
+
+window.addEventListener('resize', convexPosition)
+
+gsap.to(document.querySelector('.convex path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -550.025 181.087 -865.715 188.255 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: '.convex',
+        start: 'top center',
+        end: 'bottom top',
+        scrub: true,
+    }
+})
+
+function convexPosition() {
+    const convex = document.querySelector('.convex')
+
+    let convex_height = convex.getBoundingClientRect().height
+    
+    gsap.set(convex, {
+        bottom: (convex_height - 1) * -1
+    })
+}
+// end interactivity for convex
 
 
 // interactivity for sect_two_content
