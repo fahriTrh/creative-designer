@@ -241,3 +241,53 @@ function sect_two_contentPos() {
 }
 
 // end interactivity for sect_two_content
+
+
+// interactivity for marque
+
+const mm = gsap.matchMedia()
+
+const marque = document.querySelector('.marque')
+let marque_content = marque.querySelectorAll('span')
+
+cloneContent()
+
+window.requestAnimationFrame(marqueAnimation)
+window.addEventListener('resize', marqueAnimation)
+
+function marqueAnimation() {
+    marque_content = marque.querySelectorAll('span')
+    
+    let marque_content_length = 0
+    
+    marque_content.forEach(mqc => {
+        marque_content_length += mqc.getBoundingClientRect().width
+    })
+    
+    marque_content.forEach(mqc => {
+        gsap.to(mqc, {
+            x: () => (marque_content_length / 2) * -1,
+            scrollTrigger: {
+                trigger: marque,
+                scrub: 2,
+                start: 'top bottom',
+                end: 'bottom top',
+            }
+        })
+    })
+}
+
+
+function cloneContent() {
+    marque_content.forEach(mqc => {
+        let newContent = mqc.cloneNode(true)
+        marque.append(newContent)
+    })
+    
+    marque_content.forEach(mqc => {
+        let newContent = mqc.cloneNode(true)
+        marque.append(newContent)
+    })
+}
+
+// end interactivity for marque
