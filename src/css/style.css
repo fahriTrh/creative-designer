@@ -6,9 +6,16 @@
 }
 
 @font-face {
-    font-family: 'Tenor Sans';
-    src: url('/src/fonts/tenor-sans/TenorSans-Regular.ttf') ;
-    font-weight: normal;
+    font-family: 'Teen';
+    src: url('/src/fonts/teen/teen.otf') ;
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Dobkin Script';
+    src: url('/src/fonts/dobkin-script/DobkinScript.ttf') ;
+    font-weight: 100;
     font-style: normal;
 }
 
@@ -19,9 +26,10 @@
 
 body {
     font-size: 1rem;
-    font-family: 'Tenor Sans', sans-serif;
+    font-family: 'Teen', sans-serif;
     font-style: normal;
     background-color: white;
+    font-weight: 100;
 }
 
 .fancy {
@@ -147,18 +155,94 @@ nav .logo {
 
 .section_two {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     background-color: black;
+    color: white;
     position: relative;
     z-index: 9;
     position: relative;
 }
 
-.section_two .curve {
+.section_two .sect_two_content {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    z-index: 8;
+}
+
+.sect_two_content {
+    /* font-size: clamp(10vw, 11vw, 12vw); */
+    font-size: clamp(3.58rem, 2.308rem + 6.36vw, 8.03rem);
+}
+
+.sect_two_content .wbs {
+    font-family: 'Dobkin Script', sans-serif;
+}
+
+.sect_two_content .spc, .sect_two_content .wbs {
+    font-family: 'Dobkin Script', sans-serif;
+    font-size: clamp(11vw, 12vw, 13vw);
+}
+
+.sect_two_content .and {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: 'Dobkin Script', sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.and .line {
+    display: block;
+    width: clamp(6rem, 4rem + 8vw, 13rem);
+    height: .6px;
+    background-color: rgb(140, 140, 140);
+}
+
+.sect_two_content .brd {
+    margin-top: 6vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.sect_two_content .inc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.inc .line {
+    margin-left: 2rem;
+}
+
+.inc span:nth-child(1) {
+    font-family: 'Dobkin Script', sans-serif;
+}
+
+.inc span:nth-child(3) {
+    flex-basis: 100%;
+}
+
+.sect_two_content .inc .line {
+    display: inline-block;
+    height: .6px;
+    background-color: rgb(140, 140, 140);
+    width: clamp(7rem, 5rem + 10vw, 14rem);
+    max-width: 25%;
+}
+
+.section_two .concave {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    z-index: 7;
 }
 
 .hero_content {
@@ -279,6 +363,14 @@ nav .logo {
         line-height: 9vw;
     }
 
+    .sect_two_content {
+        font-size: clamp(8vw, 9vw, 10vw);
+    }
+
+    .sect_two_content .spc, .sect_two_content .wbs {
+        font-size: clamp(9vw, 10vw, 11vw);
+    }
+
     .hero_title .fancy {
         font-size: clamp(8vw, 9vw, 10vw);
     }
@@ -291,6 +383,25 @@ nav .logo {
         width: 8rem;
         height: 1px;
         background-color: #000;
+    }
+
+    .inc span:nth-child(3) {
+        flex-basis: auto;
+    }
+
+    .inc .line {
+        margin-right: 2rem;
+    }
+
+    .sect_two_content .brd {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 3vw;
+        gap: 1rem;
+    }
+
+    .sect_two_content .and {
+        gap: 2.3rem;
     }
 }
 
@@ -305,6 +416,20 @@ nav .logo {
         width: 10rem;
         height: 1px;
         background-color: #000;
+    }
+
+    .sect_two_content .brd {
+        margin-top: 2vw;
+        gap: 2rem;
+    }
+
+    .sect_two_content .and {
+        gap: 2.5rem;
+    }
+
+    .inc .line {
+        margin-right: 2.5rem;
+        margin-left: 2.5rem;
     }
 }
 
@@ -321,4 +446,7 @@ nav .logo {
         height: 1px;
         background-color: #000;
     } */
+    .sect_two_content .brd {
+        gap: 2.5rem;
+    }
 }

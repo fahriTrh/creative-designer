@@ -188,40 +188,56 @@ buttons.forEach((button) => {
 
 // end interactivity for hero buttons
 
-// interactivity for curve
+// interactivity for concave
 
-window.requestAnimationFrame(curvePosition)
+window.requestAnimationFrame(concavePosition)
 
-window.addEventListener('resize', () => {
-    curvePosition()
-})
+window.addEventListener('resize', concavePosition)
 
-gsap.to(document.querySelector('.curve path'), {
+gsap.to(document.querySelector('.concave path'), {
     attr: {
         d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
     },
     ease: 'in',
     scrollTrigger: {
-        trigger: '.curve',
+        trigger: '.concave',
         start: 'top bottom',
         end: 'bottom center',
         scrub: true
     }
 })
 
-function curvePosition() {
+function concavePosition() {
     const section_two = document.querySelector('.section_two')
-    const curve = document.querySelector('.curve')
+    const concave = document.querySelector('.concave')
 
     let section_two_height = section_two.getBoundingClientRect().height
-    let curve_height = curve.getBoundingClientRect().height
+    let concave_height = concave.getBoundingClientRect().height
 
     gsap.set(section_two, {
-        marginTop: curve_height
+        marginTop: concave_height
     })
     
-    gsap.set(curve, {
-        top: (curve_height - 10) * -1
+    gsap.set(concave, {
+        top: (concave_height - 10) * -1
     })
 }
-// end interactivity for curve
+// end interactivity for concave
+
+
+// interactivity for sect_two_content
+
+window.requestAnimationFrame(sect_two_contentPos)
+
+window.addEventListener('resize', sect_two_contentPos)
+
+function sect_two_contentPos() {
+    const sect_two_content = document.querySelector('.sect_two_content')
+    gsap.set(sect_two_content, {
+        top: () => {
+            return document.querySelector('.concave').getBoundingClientRect().height / 2 * -1
+        } 
+    })
+}
+
+// end interactivity for sect_two_content
