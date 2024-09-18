@@ -320,3 +320,60 @@ function cloneContent() {
 }
 
 // end interactivity for marque
+
+
+// section three position
+
+window.requestAnimationFrame(setSectionThreePos)
+window.addEventListener('resize', setSectionThreePos)
+
+function setSectionThreePos() {
+    let convex_height = document.querySelector('.convex').getBoundingClientRect().height
+    
+    let section_two_height = document.querySelector('.sect_two_content').getBoundingClientRect().height
+    
+    const sect_three = document.querySelector('.section_three')
+    
+    gsap.set(sect_three, {
+        top: () => section_two_height + convex_height + 40
+    })
+}
+
+// end section three position
+
+
+// work section number interactifity
+
+const numbers = document.querySelectorAll('.work_number p')
+let text = null
+
+numbers.forEach(number => {
+    text = new SplitType(number, {types: 'chars'})
+})
+
+const home_work_column = document.querySelectorAll('.home_work_column')
+
+home_work_column.forEach(column => {
+    let text = column.querySelectorAll('.work_number p')
+    text = new SplitType(text, {types: 'chars'})
+
+    column.addEventListener('mouseenter', () => {
+        gsap.to(text.chars, {
+            y: '-100%',
+            stagger: 0.11,
+            ease: 'in',
+            // duration: .3
+        })
+    })
+
+    column.addEventListener('mouseleave', () => {
+        let reversedText = Array.from(text.chars).reverse();
+        gsap.to(reversedText, {
+            y: '0%',
+            stagger: 0.11,
+            ease: 'in',
+            // duration: .3
+        })
+    })
+})
+// end work section number interactifity
