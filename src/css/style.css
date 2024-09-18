@@ -480,6 +480,10 @@ nav .logo {
     width: 100%;
     height: auto;
     border-bottom: 1px solid #4f5053;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 .home_work {
@@ -528,6 +532,25 @@ nav .logo {
 
 .work_right span {
     font-size: clamp(3.58rem, 2.308rem + 4.36vw, 6.03rem);
+}
+
+.home_work_visual {
+    position: absolute;
+    width: calc(43rem + 3vw);
+    height: 18rem;
+    border-radius: 15rem;
+    overflow: hidden;
+    display: none;
+    z-index: 9;
+    top: 100%;
+    opacity: 0;
+}
+
+.home_work_visual img {
+    width: 150%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 @media (min-width: 479px) {
@@ -670,6 +693,10 @@ nav .logo {
     .work_name p {
         font-size: clamp(1rem, 1rem + 2vw, 3rem);
     }
+
+    .home_work_visual {
+        display: block;
+    }
 }
 
 @media (min-width: 992px) {
@@ -699,10 +726,20 @@ nav .logo {
         width: 70%;
         margin-top: 15rem;
     }
+
+    .home_work_visual {
+        width: calc(46rem + 6vw);
+        height: 22rem;
+    }
 }
 
 @media (min-width: 1200px) {
     .section_two .vision {
         width: 60%;
+    }
+
+    .home_work_visual {
+        width: calc(48rem + 6vw);
+        height: 24rem;
     }
 }

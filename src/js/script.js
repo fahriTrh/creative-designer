@@ -354,6 +354,8 @@ numbers.forEach(number => {
 const home_work_column = document.querySelectorAll('.home_work_column')
 
 home_work_column.forEach(column => {
+    let home_work_visual = column.querySelector('.home_work_visual')
+
     let text = column.querySelectorAll('.work_number p')
     text = new SplitType(text, {types: 'chars'})
 
@@ -362,7 +364,14 @@ home_work_column.forEach(column => {
             y: '-100%',
             stagger: 0.11,
             ease: 'in',
-            // duration: .3
+            duration: .3
+        })
+
+        gsap.to(home_work_visual, {
+            top: '0%',
+            right: '7.5%',
+            opacity: 1,
+            ease: 'out'
         })
     })
 
@@ -372,8 +381,23 @@ home_work_column.forEach(column => {
             y: '0%',
             stagger: 0.11,
             ease: 'in',
-            // duration: .3
+            duration: .3
+        })
+
+        gsap.to(home_work_visual, {
+            top: '100%',
+            right: '0%',
+            opacity: 0,
+            ease: 'in'
         })
     })
 })
 // end work section number interactifity
+
+
+// const home_work_visual = document.querySelector('.home_work_visual')
+
+// gsap.from(home_work_visual, {
+//     top: '100%',
+//     right: '0%'
+// })
