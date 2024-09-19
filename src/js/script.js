@@ -2,9 +2,9 @@ gsap.registerPlugin(ScrollTrigger)
 
 const lenis = new Lenis()
 
-lenis.on('scroll', (e) => {
-  console.log(e)
-})
+// lenis.on('scroll', (e) => {
+//   console.log(e)
+// })
 
 lenis.on('scroll', ScrollTrigger.update)
 
@@ -27,40 +27,53 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second']
+const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second'];
 
-hoverable_elements.forEach(element => {
+hoverable_elements.forEach(selector => {
+    let el = document.querySelector(selector);
 
-    let el = document.querySelector(element)
+    if (el) {
+        el.addEventListener('mouseenter', function() {
+            gsap.killTweensOf('.custom_cursor');
+            gsap.killTweensOf('.custom_cursor_wrap');
 
-    el.addEventListener('mouseenter', function() {
-        gsap.to('.custom_cursor', {
-            scale: 6,
-            duration: .2,
-            ease: 'in',
-            delay: .1
-        })
-        gsap.to('.custom_cursor_wrap', {
-            scale: 0,
-            duration: .2,
-            ease: 'in',
-            delay: .1
-        })
-    })
-    el.addEventListener('mouseleave', function() {
-        gsap.to('.custom_cursor', {
-            scale: 1,
-            duration: .2,
-            ease: 'in'
-        })
-        gsap.to('.custom_cursor_wrap', {
-            scale: 1,
-            duration: .2,
-            ease: 'in',
-            delay: .1
-        })
-    })
-})
+            gsap.to('.custom_cursor', {
+                scale: 6,
+                duration: 0.2,
+                ease: 'in',
+                delay: 0.1
+            });
+
+            gsap.to('.custom_cursor_wrap', {
+                scale: 0,
+                duration: 0.2,
+                ease: 'in',
+                delay: 0.1
+            });
+        });
+
+        el.addEventListener('mouseleave', function() {
+            gsap.killTweensOf('.custom_cursor');
+            gsap.killTweensOf('.custom_cursor_wrap');
+
+            gsap.to('.custom_cursor', {
+                scale: 1,
+                duration: 0.2,
+                ease: 'in',
+                clearProps: 'all' // Reset after animation ends
+            });
+
+            gsap.to('.custom_cursor_wrap', {
+                scale: 1,
+                duration: 0.2,
+                ease: 'in',
+                delay: 0.1,
+                clearProps: 'all'
+            });
+        });
+    }
+});
+
 
 // interactivity for logo
 const logo = document.querySelector('.logo')
@@ -159,31 +172,31 @@ menu.addEventListener('mouseleave', function() {
 
 // interactivity for hero buttons
 
-const buttons = document.querySelectorAll('.buttons button')
+const buttons = document.querySelectorAll('.buttons button');
 
 buttons.forEach((button) => {
     
-    const xTo = gsap.quickTo(button, 'x', {duration: 1, ease: 'elastic.out(1, 0.3)'})
-    const yTo = gsap.quickTo(button, 'y', {duration: 1, ease: 'elastic.out(1, 0.3)'})
+    const xTo = gsap.quickTo(button, 'x', {duration: 0.4, ease: 'elastic.out(0.3, 0.1)'});
+    const yTo = gsap.quickTo(button, 'y', {duration: 0.4, ease: 'elastic.out(0.3, 0.1)'});
     
     button.addEventListener('mousemove', function(e) {
-        let {clientX, clientY} = e
+        let {clientX, clientY} = e;
         let {width, height, left, top} = button.getBoundingClientRect();
         
-        let x = clientX - (left + width / 2)
-        let y = clientY - (top + height / 2)
+        let x = clientX - (left + width / 2);
+        let y = clientY - (top + height / 2);
     
-        // gsap.to(button, {x, y})
-        xTo(x)
-        yTo(y)
-    })
+        xTo(x);
+        yTo(y);
+    });
     
     button.addEventListener('mouseleave', function() {
-        // gsap.to(button, {x: 0, y: 0})
-        xTo(0)
-        yTo(0)
-    })
-})
+        xTo(0);
+        yTo(0);
+    });
+});
+
+
 
 
 // end interactivity for hero buttons
@@ -354,50 +367,78 @@ numbers.forEach(number => {
 const home_work_column = document.querySelectorAll('.home_work_column')
 
 home_work_column.forEach(column => {
-    let home_work_visual = column.querySelector('.home_work_visual')
+    let home_work_visual = column.querySelector('.home_work_visual');
 
-    let text = column.querySelectorAll('.work_number p')
-    text = new SplitType(text, {types: 'chars'})
+    let text = column.querySelectorAll('.work_number p');
+    text = new SplitType(text, {types: 'chars'});
 
     column.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(text.chars); // Pastikan animasi tidak tumpang tindih
+        gsap.killTweensOf(home_work_visual);
+
         gsap.to(text.chars, {
             y: '-100%',
             stagger: 0.11,
             ease: 'in',
-            duration: .3
-        })
+            duration: .3,
+            delay: .3
+        });
 
         gsap.to(home_work_visual, {
-            top: '0%',
+            top: '-25%',
             right: '7.5%',
             opacity: 1,
             ease: 'out'
-        })
-    })
+        });
+    });
 
     column.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(text.chars);
+        gsap.killTweensOf(home_work_visual);
+
         let reversedText = Array.from(text.chars).reverse();
         gsap.to(reversedText, {
             y: '0%',
             stagger: 0.11,
             ease: 'in',
-            duration: .3
-        })
+            duration: .3,
+            delay: .3
+        });
 
         gsap.to(home_work_visual, {
             top: '100%',
             right: '0%',
             opacity: 0,
-            ease: 'in'
-        })
-    })
-})
-// end work section number interactifity
+            ease: 'in',
+            clearProps: 'all'
+        });
+    });
+});
 
 
-// const home_work_visual = document.querySelector('.home_work_visual')
 
-// gsap.from(home_work_visual, {
-//     top: '100%',
-//     right: '0%'
-// })
+const home_work_visuals = document.querySelectorAll('.home_work_visual')
+
+const windowWidth = window.innerWidth;
+
+document.addEventListener("mousemove", (event) => {
+  const mouseX = event.clientX;
+
+  const moveXImage = (mouseX / windowWidth - 0.5) * 100;
+  const moveXParent = (mouseX / windowWidth - 0.5) * 300;
+
+  home_work_visuals.forEach(home_work => {
+      gsap.to(home_work, {
+        x: moveXParent,
+        duration: 0.5,
+        ease: "power2.out"
+      });
+
+      gsap.to(home_work.querySelector('img'), {
+        x: moveXImage,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+  })
+
+});

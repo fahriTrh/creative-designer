@@ -58,6 +58,7 @@ body {
     font-style: normal;
     background-color: white;
     font-weight: 100;
+    overflow-x: hidden;
 }
 
 .fancy {
@@ -551,6 +552,9 @@ nav .logo {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    /* transform: translateX(-25%); */
+    position: absolute;
+    left: -25%;
 }
 
 @media (min-width: 479px) {
