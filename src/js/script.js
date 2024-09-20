@@ -14,7 +14,15 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
+// view cursor
+const view_cursor = document.querySelector('.view_cursor')
+var demo = new CircleType(view_cursor)
+
+// end cursor
+
 window.addEventListener('mousemove', (e) => {
+
+
     gsap.to('.custom_cursor' , {
         left: () => e.clientX - 5,
         top: () => e.clientY - 5,
@@ -24,6 +32,12 @@ window.addEventListener('mousemove', (e) => {
         left: () => e.clientX - 30,
         top: () => e.clientY - 30,
         duration: .3
+    })
+
+    gsap.to(view_cursor , {
+        left: () => e.clientX - view_cursor.getBoundingClientRect().width / 2,
+        top: () => e.clientY - view_cursor.getBoundingClientRect().height / 2,
+        duration: .1
     })
 })
 
@@ -196,10 +210,9 @@ buttons.forEach((button) => {
     });
 });
 
-
-
-
 // end interactivity for hero buttons
+
+
 
 // interactivity for concave
 
@@ -235,6 +248,8 @@ function concavePosition() {
     })
 }
 // end interactivity for concave
+
+
 
 // interactivity for convex
 
@@ -345,9 +360,9 @@ function setSectionThreePos() {
     
     let section_two_height = document.querySelector('.sect_two_content').getBoundingClientRect().height
     
-    const sect_three = document.querySelector('.section_three')
+    const work_section = document.querySelector('.work_section')
     
-    gsap.set(sect_three, {
+    gsap.set(work_section, {
         top: () => section_two_height + convex_height + 40
     })
 }
@@ -390,11 +405,26 @@ home_work_column.forEach(column => {
             opacity: 1,
             ease: 'out'
         });
+
+        gsap.to('.custom_cursor_wrap', {
+            scale: 2,
+            duration: .3
+        })
+
+        gsap.set('.custom_cursor_wrap', {
+            opacity: 0
+        })
+
+        gsap.to(view_cursor , {
+            opacity: 1,
+            duration: .5
+        })
     });
 
     column.addEventListener('mouseleave', () => {
         gsap.killTweensOf(text.chars);
         gsap.killTweensOf(home_work_visual);
+        gsap.killTweensOf(view_cursor);
 
         let reversedText = Array.from(text.chars).reverse();
         gsap.to(reversedText, {
@@ -412,6 +442,19 @@ home_work_column.forEach(column => {
             ease: 'in',
             clearProps: 'all'
         });
+
+        gsap.to('.custom_cursor_wrap', {
+            scale: 1,
+            duration: .3
+        })
+
+        gsap.set('.custom_cursor_wrap', {
+            opacity: 1
+        })
+
+        gsap.set(view_cursor , {
+            opacity: 0
+        })
     });
 });
 
