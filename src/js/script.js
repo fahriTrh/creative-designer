@@ -276,7 +276,7 @@ function convexPosition() {
     let convex_height = convex.getBoundingClientRect().height
     
     gsap.set(convex, {
-        bottom: (convex_height - 1) * -1
+        bottom: (convex_height / 2 - 1) * -1
     })
 }
 // end interactivity for convex
@@ -357,20 +357,20 @@ window.addEventListener('resize', setSectionThreePos)
 
 function setSectionThreePos() {
     let convex_height = document.querySelector('.convex').getBoundingClientRect().height
+    let concave_height = document.querySelector('.concave').getBoundingClientRect().height
     
-    let section_two_height = document.querySelector('.sect_two_content').getBoundingClientRect().height
+    let section_two_height = document.querySelector('.section_two').getBoundingClientRect().height
     
     const work_section = document.querySelector('.work_section')
     
     gsap.set(work_section, {
-        top: () => section_two_height + convex_height + 40
+        marginTop: () => convex_height / 2 + convex_height / 3
     })
 }
-
 // end section three position
 
 
-// work section number interactifity
+// work section interactifity
 
 const numbers = document.querySelectorAll('.work_number p')
 let text = null
@@ -458,8 +458,6 @@ home_work_column.forEach(column => {
     });
 });
 
-
-
 const home_work_visuals = document.querySelectorAll('.home_work_visual')
 
 const windowWidth = window.innerWidth;
@@ -485,3 +483,5 @@ document.addEventListener("mousemove", (event) => {
   })
 
 });
+
+// end work section interactifity
