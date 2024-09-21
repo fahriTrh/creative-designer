@@ -41,7 +41,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second'];
+const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second', '.btn_about', '.btn_ready'];
 
 hoverable_elements.forEach(selector => {
     let el = document.querySelector(selector);
@@ -186,7 +186,7 @@ menu.addEventListener('mouseleave', function() {
 
 // interactivity for hero buttons
 
-const buttons = document.querySelectorAll('.buttons button');
+const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     
@@ -485,3 +485,39 @@ document.addEventListener("mousemove", (event) => {
 });
 
 // end work section interactifity
+
+
+// client interactifity
+const clientConcave = document.querySelector('.client_section .concave')
+
+window.requestAnimationFrame(clientConcavePos)
+window.addEventListener('resize', clientConcavePos)
+
+gsap.to(clientConcave.querySelector('path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -639 102 -816 91 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: clientConcave,
+        start: 'top center',
+        end: 'bottom top',
+        scrub: true,
+    }
+})
+
+function clientConcavePos() {
+    let clientConcaveHeight = clientConcave.getBoundingClientRect().height
+
+    gsap.set(clientConcave, {
+        bottom: clientConcaveHeight * -1
+    })
+
+    gsap.set('.about_section', {
+        marginTop: clientConcaveHeight / 2
+    })
+
+    // m 1 1 v 331.5 h 1440 v -331.5 c -639 102 -816 91 -1440 0 z
+}
+
+// end client interactifity
