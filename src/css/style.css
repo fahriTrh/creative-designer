@@ -7,42 +7,42 @@
 
 @font-face {
     font-family: 'Teen';
-    src: url('/src/fonts/teen/teen.otf') ;
+    src: url('/src/assets/fonts/teen/teen.otf') ;
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Dobkin Script';
-    src: url('/src/fonts/dobkin-script/DobkinScript.ttf') ;
+    src: url('/src/assets/fonts/dobkin-script/DobkinScript.ttf') ;
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Floor Light';
-    src: url('/src/fonts/floorlight/Floorlight.ttf') ;
+    src: url('/src/assets/fonts/floorlight/Floorlight.ttf') ;
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Cooper Hewitt';
-    src: url('/src/fonts/cooper-hewitt/CooperHewitt-Light.otf') ;
+    src: url('/src/assets/fonts/cooper-hewitt/CooperHewitt-Light.otf') ;
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Prida01';
-    src: url('/src/fonts/prida01/Prida01.otf') ;
+    src: url('/src/assets/fonts/prida01/Prida01.otf') ;
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Chopin Script';
-    src: url('/src/fonts/chopin-script/ChopinScript.ttf') ;
+    src: url('/src/assets/fonts/chopin-script/ChopinScript.ttf') ;
     font-weight: 100;
     font-style: normal;
 }
