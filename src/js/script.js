@@ -2,10 +2,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 const lenis = new Lenis()
 
-// lenis.on('scroll', (e) => {
-//   console.log(e)
-// })
-
 lenis.on('scroll', ScrollTrigger.update)
 
 gsap.ticker.add((time)=>{
@@ -41,51 +37,53 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second', '.btn_about', '.btn_ready'];
+const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second', '.link'];
 
 hoverable_elements.forEach(selector => {
-    let el = document.querySelector(selector);
+    let elements = document.querySelectorAll(selector);
 
-    if (el) {
-        el.addEventListener('mouseenter', function() {
-            gsap.killTweensOf('.custom_cursor');
-            gsap.killTweensOf('.custom_cursor_wrap');
-
-            gsap.to('.custom_cursor', {
-                scale: 6,
-                duration: 0.2,
-                ease: 'in',
-                delay: 0.1
+    elements.forEach(el => {
+        if (el) {
+            el.addEventListener('mouseenter', function() {
+                gsap.killTweensOf('.custom_cursor');
+                gsap.killTweensOf('.custom_cursor_wrap');
+    
+                gsap.to('.custom_cursor', {
+                    scale: 6,
+                    duration: 0.2,
+                    ease: 'in',
+                    delay: 0.1
+                });
+    
+                gsap.to('.custom_cursor_wrap', {
+                    scale: 0,
+                    duration: 0.2,
+                    ease: 'in',
+                    delay: 0.1
+                });
             });
-
-            gsap.to('.custom_cursor_wrap', {
-                scale: 0,
-                duration: 0.2,
-                ease: 'in',
-                delay: 0.1
+    
+            el.addEventListener('mouseleave', function() {
+                gsap.killTweensOf('.custom_cursor');
+                gsap.killTweensOf('.custom_cursor_wrap');
+    
+                gsap.to('.custom_cursor', {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: 'in',
+                    clearProps: 'all' // Reset after animation ends
+                });
+    
+                gsap.to('.custom_cursor_wrap', {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: 'in',
+                    delay: 0.1,
+                    clearProps: 'all'
+                });
             });
-        });
-
-        el.addEventListener('mouseleave', function() {
-            gsap.killTweensOf('.custom_cursor');
-            gsap.killTweensOf('.custom_cursor_wrap');
-
-            gsap.to('.custom_cursor', {
-                scale: 1,
-                duration: 0.2,
-                ease: 'in',
-                clearProps: 'all' // Reset after animation ends
-            });
-
-            gsap.to('.custom_cursor_wrap', {
-                scale: 1,
-                duration: 0.2,
-                ease: 'in',
-                delay: 0.1,
-                clearProps: 'all'
-            });
-        });
-    }
+        }
+    })
 });
 
 
@@ -301,8 +299,6 @@ function sect_two_contentPos() {
 
 
 // interactivity for marque
-
-const mm = gsap.matchMedia()
 
 const marque = document.querySelector('.marque')
 let marque_content = marque.querySelectorAll('span')
@@ -521,3 +517,40 @@ function clientConcavePos() {
 }
 
 // end client interactifity
+
+
+// about_section interactifity
+
+window.requestAnimationFrame(concaveAboutPosition)
+
+window.addEventListener('resize', concaveAboutPosition)
+
+gsap.to(document.querySelector('.about_section .concave path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: '.about_section .concave',
+        start: 'top center',
+        end: 'top top',
+        scrub: true
+    }
+})
+
+function concaveAboutPosition() {
+    const about_section = document.querySelector('.about_section')
+    const concave = about_section.querySelector('.concave')
+
+    let concave_height = concave.getBoundingClientRect().height
+    
+    gsap.set('footer', {
+        marginTop: concave_height / 2
+    })
+    
+    gsap.set(concave, {
+        bottom: (concave_height) * -1
+    })
+}
+
+// end about_section interactifity
