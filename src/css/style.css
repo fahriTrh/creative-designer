@@ -1018,11 +1018,15 @@ footer .btn_prima {
     pointer-events: none;
 }
 
+.hText {
+    display: inline-block;
+}
+
 .pre_load .logo {
     color: var(--dark);
     font-size: clamp(2.58rem, 2.308rem + 2.36vw, 4.03rem + 3vw);
     margin: auto;
-    transform-origin: top center;
+    transform-origin: top left;
 }
 
 .pre_load .logo .rotate {

@@ -628,7 +628,7 @@ expandIn.forEach(el => {
 // end some animation on scroll
 
 
-// interactifity for pre load convex 
+// animation for pre load 
 
 window.requestAnimationFrame(convexLoadPosition)
 window.addEventListener('resize', convexLoadPosition)
@@ -644,40 +644,69 @@ function convexLoadPosition() {
 }
 
 window.addEventListener("load", function() {
-    const rotates = document.querySelectorAll('.pre_load .logo .rotate')
-
-    rotates.forEach(rotate => {
-        gsap.to(rotate, {
-            rotateX: -45,
-            opacity: 0,
-            delay: 2,
-            y: -200,
-            onComplete: onLoadedAnim
-        })
-    })
+    onLoadedAnim()
 });
 
 function onLoadedAnim() {
-    const tl = gsap.timeline()
-    tl.to('.pre_load', {
-        bottom: '100%',
-    },0)
 
-    tl.to('.pre_load .convex path', {
-        attr: {
-            d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
-        },
-    },0)
+    const rotates = document.querySelectorAll('.pre_load .logo .rotate')
+    const heroText = document.querySelectorAll('.hText');
+    const buttons = document.querySelectorAll('.buttons button')
+    const pre_load_height = document.querySelector('.pre_load').getBoundingClientRect().height
+    
+    // rotates.forEach(rotate => {
+        gsap.to(rotates, {
+            opacity: 0,
+            rotateX: -75,
+            rotate: -3,
+            delay: 1,
+            y: -200,
+            onComplete: function() {
+                const tl = gsap.timeline()
+                
+                tl.to('.pre_load', {
+                    bottom: '100%',
+                },0)
 
-    tl.to('.pre_load .convex', {
-        bottom: '0%',
-        duration: .25,
-        delay: .25
-    }, 0)
+                tl.to('.pre_load .convex path', {
+                    attr: {
+                        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+                    },
+                },0)
 
-    gsap.set(document.body, {
-        position: 'static'
+                tl.to('.pre_load .convex', {
+                    bottom: '0%',
+                    duration: .25,
+                    delay: .25
+                }, 0)
+
+                gsap.set(document.body, {
+                    position: 'static'
+                })
+
+                tl.to('.pre_load', {
+                    opacity: 0,
+                    display: 'none',
+                })
+            }
+        })
+    // })
+
+    gsap.from(heroText, {
+        y: 100,
+        rotateX: -75,
+        rotate: -3,
+        stagger: 0.1,
+        delay: 1.5,
+        opacity: 0
+    });
+
+    gsap.from(buttons, {
+        delay: 2,
+        y: 100,
+        opacity: 0,
+        stagger: 0.1
     })
 }
 
-// end interactifity for pre load convex 
+// end animation for pre load 
