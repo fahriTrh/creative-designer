@@ -37,7 +37,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['.logo', '.menu', '.btn_prima', '.btn_second', '.link'];
+const hoverable_elements = ['nav .logo', '.menu', '.btn_prima', '.btn_second', '.link'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -554,3 +554,130 @@ function concaveAboutPosition() {
 }
 
 // end about_section interactifity
+
+
+// some animation on scroll
+
+const textBottomRightIn = document.querySelectorAll('.textBRIn')
+textBottomRightIn.forEach(text => {
+    gsap.from(text, {
+        y: 5,
+        rotate: -5,
+        skewY: -15,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+            trigger: text,
+            start: 'top bottom',
+            end: 'bottom bottom',
+        }
+    })
+})
+
+const textBottomTopIn = document.querySelectorAll('.txtBTIn')
+textBottomTopIn.forEach(text => {
+    gsap.from(text, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+            trigger: text,
+            start: 'top bottom',
+            end: 'bottom bottom',
+        }
+    })
+})
+
+
+const client_cards = document.querySelectorAll('.client_card')
+
+
+client_cards.forEach(card => {
+    gsap.from(card, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.1, 
+        scrollTrigger: {
+            trigger: card,
+            start: 'top bottom',
+            end: 'bottom bottom',
+        }
+    })
+})
+
+
+const expandIn = document.querySelectorAll('.expandIn')
+
+expandIn.forEach(el => {
+    gsap.from(el, {
+        width: 0,
+        duration: 1,
+        ease: 'in',
+        scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom bottom',
+        }
+    })
+})
+
+// end some animation on scroll
+
+
+// interactifity for pre load convex 
+
+window.requestAnimationFrame(convexLoadPosition)
+window.addEventListener('resize', convexLoadPosition)
+
+function convexLoadPosition() {
+    const convex = document.querySelector('.pre_load .convex')
+
+    let convex_height = convex.getBoundingClientRect().height
+    
+    gsap.set(convex, {
+        bottom: (convex_height / 2) * -1
+    })
+}
+
+window.addEventListener("load", function() {
+    const rotates = document.querySelectorAll('.pre_load .logo .rotate')
+
+    rotates.forEach(rotate => {
+        gsap.to(rotate, {
+            rotateX: -45,
+            opacity: 0,
+            delay: 2,
+            y: -200,
+            onComplete: onLoadedAnim
+        })
+    })
+});
+
+function onLoadedAnim() {
+    const tl = gsap.timeline()
+    tl.to('.pre_load', {
+        bottom: '100%',
+    },0)
+
+    tl.to('.pre_load .convex path', {
+        attr: {
+            d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+        },
+    },0)
+
+    tl.to('.pre_load .convex', {
+        bottom: '0%',
+        duration: .25,
+        delay: .25
+    }, 0)
+
+    gsap.set(document.body, {
+        position: 'static'
+    })
+}
+
+// end interactifity for pre load convex 
