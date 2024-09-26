@@ -248,6 +248,7 @@ button {
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
+    cursor: none;
 }
 
 button:nth-child(1):hover {
@@ -978,12 +979,12 @@ footer .btn_prima {
 .offset_menu {
     position: fixed;
     top: 0;
-    bottom: 0;
+    bottom: 100%;
     right: 0;
     left: 0;
     z-index: 887;
     background-color: var(--light-gray);
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* .offset_menu .x {
@@ -1455,7 +1456,9 @@ footer .btn_prima {
         top: 0;
         left: 65%;
         right: 0;
+        transform: translate(130%);
         background-color: var(--light);
+        
     }
 }
 

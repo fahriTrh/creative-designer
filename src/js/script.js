@@ -255,13 +255,13 @@ window.requestAnimationFrame(convexPosition)
 
 window.addEventListener('resize', convexPosition)
 
-gsap.to(document.querySelector('.convex path'), {
+gsap.to(document.querySelector('.section_two .convex path'), {
     attr: {
         d: 'm 1 1 v 331.5 h 1440 v -331.5 c -550.025 181.087 -865.715 188.255 -1440 0 z'
     },
     ease: 'in',
     scrollTrigger: {
-        trigger: '.convex',
+        trigger: '.section_two .convex',
         start: 'top center',
         end: 'bottom top',
         scrub: true,
@@ -269,7 +269,7 @@ gsap.to(document.querySelector('.convex path'), {
 })
 
 function convexPosition() {
-    const convex = document.querySelector('.convex')
+    const convex = document.querySelector('.section_two .convex')
 
     let convex_height = convex.getBoundingClientRect().height
     
@@ -674,18 +674,20 @@ function onLoadedAnim() {
                 
                 tl.to('.pre_load', {
                     bottom: '100%',
+                    duration: 1
                 },0)
 
                 tl.to('.pre_load .convex path', {
                     attr: {
                         d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
                     },
+                    duration: 2
                 },0)
 
                 tl.to('.pre_load .convex', {
                     bottom: '0%',
-                    duration: .25,
-                    delay: .25
+                    duration: 1,
+                    delay: .5
                 }, 0)
 
                 gsap.set(document.body, {
@@ -705,12 +707,12 @@ function onLoadedAnim() {
         rotateX: -75,
         rotate: -3,
         stagger: 0.1,
-        delay: 1.5,
+        delay: 2,
         opacity: 0
     });
 
     gsap.from(buttons, {
-        delay: 2,
+        delay: 2.5,
         duration: 1,
         y: 100,
         opacity: 0,
@@ -719,3 +721,48 @@ function onLoadedAnim() {
 }
 
 // end animation for pre load
+
+document.querySelector('.menu_icon').addEventListener('click', function() {
+
+    const tl = gsap.timeline()
+    
+    if (this.classList.contains('active')) {
+        gsap.killTweensOf('.offset_menu .sub_menu');
+        gsap.killTweensOf('.offset_menu');
+
+        tl.to('.offset_menu .sub_menu', {
+            x: '130%',
+            ease: 'power2.in',
+            duration: 1
+        }, 0)
+        tl.to('.offset_menu .studies_projects', {
+            opacity: 0
+        }, 0)
+        tl.to('.offset_menu', {
+            bottom: '100%',
+            ease: 'power2.out',
+            duration: 1
+        })
+        this.classList.remove('active')
+    } else {
+        gsap.killTweensOf('.offset_menu .sub_menu');
+        gsap.killTweensOf('.offset_menu');
+        
+        tl.to('.offset_menu', {
+            bottom: 0,
+            ease: 'power2.in',
+            duration: 1
+        })
+        tl.addLabel('sub')
+        tl.to('.offset_menu .sub_menu', {
+            x: 0,
+            ease: 'power2.out',
+            duration: 1
+        }, 'sub')
+        tl.to('.offset_menu .studies_projects', {
+            opacity: 1,
+            delay: .5
+        }, 'sub')
+        this.classList.add('active')
+    }
+})
