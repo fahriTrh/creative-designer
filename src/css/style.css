@@ -5,6 +5,13 @@
 }
 
 @font-face {
+    font-family: 'Euphoria Script';
+    src: url('/src/assets/fonts/euphoria-script/EuphoriaScript-Regular.woff') ;
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Teen';
     src: url('/src/assets/fonts/teen/teen.otf') ;
     font-weight: 100;
@@ -42,13 +49,6 @@
 @font-face {
     font-family: 'Chopin Script';
     src: url('/src/assets/fonts/chopin-script/ChopinScript.ttf') ;
-    font-weight: 100;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Euphoria Script';
-    src: url('/src/assets/fonts/euphoria-script/EuphoriaScript-Regular.ttf') ;
     font-weight: 100;
     font-style: normal;
 }
@@ -110,19 +110,20 @@ nav {
     width: 100%;
     padding: 3.5vmax;
     padding-top: 3vmax;
+    padding-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: start;
 }
 
-nav .menu {
+nav .menu_icon {
     width: 60px;
     height: 35px;
     position: relative;
     margin-top: 2rem;
 }
 
-.menu .wrap {
+.menu_icon .wrap {
     height: 100%;
     border-radius: 20px;
     background-color: var(--light);
@@ -135,7 +136,7 @@ nav .menu {
     align-items: center;
 }
 
-.menu .wrap div {
+.menu_icon .wrap div {
     width: 35%;
     height: auto;
     display: flex;
@@ -154,12 +155,12 @@ nav .menu {
     width: 100%;
 }
 
-.menu:hover .line {
+.menu_icon:hover .line {
     width: 100%;
     background-color: var(--dark);
 }
 
-.menu:hover .line:nth-child(2) {
+.menu_icon:hover .line:nth-child(2) {
     width: 60%;
 }
 
@@ -306,7 +307,7 @@ button:hover .btn_circle {
 }
 
 .sect_two_content .marque {
-    width: 90%;
+    width: 90vw;
     height: 80px;
     border: 1px solid var(--steel-gray);
     margin: auto;
@@ -456,7 +457,6 @@ button:hover .btn_circle {
     letter-spacing: .1em;
     font-weight: 100;
 }
-
 
 .work_section {
     width: 100%;
@@ -974,6 +974,119 @@ footer .btn_prima {
     font-size: 1.7rem;
 }
 
+/* menu */
+.offset_menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 887;
+    background-color: var(--light-gray);
+    overflow-x: hidden;
+}
+
+/* .offset_menu .x {
+    height: max-content;
+}
+
+.offset_menu .x svg {
+    position: absolute;
+    top: 100%;
+    transform: rotate(180deg);
+}
+
+.offset_menu .x svg path {
+    fill: red;
+} */
+
+.offset_menu .parent {
+    margin: auto;
+    width: 90vw;
+    height: 100%;
+    overflow: hidden;
+}
+
+.offset_menu .prim_menu {
+    list-style: none;
+    text-align: end;
+    font-size: calc(5rem + 3vw);
+}
+
+.offset_menu .prim_menu li:nth-child(1) {
+    margin-top: 10rem;
+}
+
+.offset_menu .prim_menu li {
+    margin-bottom: 8vw;
+}
+
+.offset_menu a {
+    color: var(--dark);
+    text-decoration: none;
+    cursor: none;
+}
+
+.offset_menu .sub_menu {
+    display: none;
+}
+
+.sub_menu .curve {
+    width: max-content;
+    height: max-content;
+}
+
+.sub_menu svg {
+    position: absolute;
+    height: 100%;
+    left: -25%;
+}
+
+.sub_menu svg path {
+    fill: var(--light);
+}
+
+.sub_menu .studies_projects {
+    margin-left: 5vw;
+    margin-top: 6rem;
+}
+
+.sub_menu ul {
+    list-style: none;
+}
+
+.sub_menu .first_link {
+    display: inline-block;
+    margin-top: 4rem;
+}
+
+.sub_menu .link {
+    margin: 0;
+    margin-top: .8rem;
+}
+
+.sub_menu .other_links {
+    margin-top: 5rem;
+    text-transform: uppercase;
+}
+
+.sub_menu .title {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.sub_menu .title::after {
+    background-color: var(--cloud-gray);
+}
+/* menu */
+.menu_icon.active .line:nth-child(1) {
+    width: 100%;
+}
+
+.menu_icon.active .line:nth-child(2) {
+    width: 60%;
+}
+
 .custom_cursor {
     width: 1rem;
     height: 1rem;
@@ -1045,8 +1158,6 @@ footer .btn_prima {
     fill: var(--light-gray);
 }
 
-
-
 .selected_work_heading {
     width: max-content;
     margin: auto;
@@ -1087,11 +1198,11 @@ footer .btn_prima {
         font-size: 2.5rem;
     }
 
-    nav .menu {
+    nav .menu_icon {
         width: 70px;
         height: 40px;
     }
-    .menu .wrap div {
+    .menu_icon .wrap div {
         gap: 8px;
     }
     
@@ -1181,6 +1292,10 @@ footer .btn_prima {
 
     .studies_projects li {
         background-color: transparent;
+    }
+
+    .offset_menu .prim_menu li {
+        margin-bottom: 3vw;
     }
 }
 
@@ -1321,6 +1436,27 @@ footer .btn_prima {
     .about_section {
         padding-bottom: 30rem;
     }
+
+    .offset_menu .parent {
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10vw;
+    }
+
+    .offset_menu .prim_menu {
+        text-align: start;
+    }
+
+    .offset_menu .sub_menu {
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 65%;
+        right: 0;
+        background-color: var(--light);
+    }
 }
 
 @media (min-width: 992px) {
@@ -1388,6 +1524,10 @@ footer .btn_prima {
     .footer_content .primary_link {
         margin-left: calc(2rem + 5vw);
     }
+
+    .offset_menu .prim_menu li {
+        margin-bottom: 2vw;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -1402,5 +1542,9 @@ footer .btn_prima {
 
     .about_section {
         padding-bottom: 35rem;
+    }
+
+    .offset_menu .prim_menu li {
+        margin-bottom: 1.5vw;
     }
 }

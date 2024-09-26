@@ -37,7 +37,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['nav .logo', '.menu', '.btn_prima', '.btn_second', '.link'];
+const hoverable_elements = ['nav .logo', '.menu_icon', '.btn_prima', '.btn_second', '.link', '.prim_menu a'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -155,7 +155,7 @@ logo.addEventListener('mouseleave', () => {
 // end interactivity for logo
 
 // interactivity for menu
-const menu = document.querySelector('.menu')
+const menu = document.querySelector('.menu_icon')
 const lines = menu.querySelectorAll('.wrap .line')
 
 menu.addEventListener('mouseenter', function() {
@@ -305,6 +305,10 @@ let marque_content = marque.querySelectorAll('span')
 
 cloneContent()
 
+// set marque width
+window.requestAnimationFrame(setMarqueWidth)
+window.addEventListener('resize', setMarqueWidth)
+
 window.requestAnimationFrame(marqueAnimation)
 window.addEventListener('resize', marqueAnimation)
 
@@ -341,6 +345,10 @@ function cloneContent() {
         let newContent = mqc.cloneNode(true)
         marque.append(newContent)
     })
+}
+
+function setMarqueWidth() {
+    gsap.set('.marque', {width: '90vw'})
 }
 
 // end interactivity for marque
@@ -703,10 +711,11 @@ function onLoadedAnim() {
 
     gsap.from(buttons, {
         delay: 2,
+        duration: 1,
         y: 100,
         opacity: 0,
         stagger: 0.1
     })
 }
 
-// end animation for pre load 
+// end animation for pre load
