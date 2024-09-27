@@ -392,7 +392,7 @@ home_work_column.forEach(column => {
     text = new SplitType(text, {types: 'chars'});
 
     column.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(text.chars); // Pastikan animasi tidak tumpang tindih
+        gsap.killTweensOf(text.chars);
         gsap.killTweensOf(home_work_visual);
 
         gsap.to(text.chars, {
@@ -557,7 +557,7 @@ function concaveAboutPosition() {
     })
     
     gsap.set(concave, {
-        bottom: (concave_height) * -1
+        bottom: (concave_height - 1) * -1
     })
 }
 
@@ -707,12 +707,12 @@ function onLoadedAnim() {
         rotateX: -75,
         rotate: -3,
         stagger: 0.1,
-        delay: 2,
+        delay: 2.3,
         opacity: 0
     });
 
     gsap.from(buttons, {
-        delay: 2.5,
+        delay: 2.8,
         duration: 1,
         y: 100,
         opacity: 0,
@@ -722,6 +722,7 @@ function onLoadedAnim() {
 
 // end animation for pre load
 
+// animation for menu
 document.querySelector('.menu_icon').addEventListener('click', function() {
 
     const tl = gsap.timeline()
@@ -729,10 +730,20 @@ document.querySelector('.menu_icon').addEventListener('click', function() {
     if (this.classList.contains('active')) {
         gsap.killTweensOf('.offset_menu .sub_menu');
         gsap.killTweensOf('.offset_menu');
+        gsap.killTweensOf('.offset_menu .convex');
+        gsap.killTweensOf('.offset_menu .studies_projects');
+        gsap.killTweensOf('.offset_menu .prim_menu li');
 
         tl.to('.offset_menu .sub_menu', {
             x: '130%',
             ease: 'power2.in',
+            duration: 1
+        }, 0)
+        tl.to('.offset_menu .prim_menu li', {
+            scaleY: 0.7,
+            opacity: 0,
+            y: 100,
+            ease: 'in',
             duration: 1
         }, 0)
         tl.to('.offset_menu .studies_projects', {
@@ -742,17 +753,22 @@ document.querySelector('.menu_icon').addEventListener('click', function() {
             bottom: '100%',
             ease: 'power2.out',
             duration: 1
-        })
+        }, 1)
+        tl.to('.offset_menu .convex', {opacity: 0, delay: .8}, 1)
         this.classList.remove('active')
     } else {
         gsap.killTweensOf('.offset_menu .sub_menu');
         gsap.killTweensOf('.offset_menu');
+        gsap.killTweensOf('.offset_menu .convex');
+        gsap.killTweensOf('.offset_menu .studies_projects');
+        gsap.killTweensOf('.offset_menu .prim_menu li');
         
         tl.to('.offset_menu', {
             bottom: 0,
             ease: 'power2.in',
             duration: 1
-        })
+        }, 0)
+        tl.to('.offset_menu .convex', {opacity: 1}, 0)
         tl.addLabel('sub')
         tl.to('.offset_menu .sub_menu', {
             x: 0,
@@ -763,6 +779,28 @@ document.querySelector('.menu_icon').addEventListener('click', function() {
             opacity: 1,
             delay: .5
         }, 'sub')
+        tl.to('.offset_menu .prim_menu li', {
+            scaleY: 1,
+            opacity: 1,
+            ease: 'in',
+            y: 0,
+            duration: 1
+        }, 'sub')
         this.classList.add('active')
     }
 })
+
+window.requestAnimationFrame(convexMenuPosition)
+window.addEventListener('resize', convexMenuPosition)
+
+function convexMenuPosition() {
+    const convex = document.querySelector('.offset_menu .convex')
+
+    let convex_height = convex.getBoundingClientRect().height
+    
+    gsap.set(convex, {
+        bottom: (convex_height / 2 - 1) * -1
+    })
+}
+
+// end animation for menu

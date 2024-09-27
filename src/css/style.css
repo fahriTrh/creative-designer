@@ -984,22 +984,24 @@ footer .btn_prima {
     left: 0;
     z-index: 887;
     background-color: var(--light-gray);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* .offset_menu .x {
     height: max-content;
 }
+*/
 
-.offset_menu .x svg {
+.offset_menu .convex {
     position: absolute;
-    top: 100%;
     transform: rotate(180deg);
+    opacity: 0;
 }
 
-.offset_menu .x svg path {
-    fill: red;
-} */
+
+.offset_menu .convex path {
+    fill: var(--light-gray);
+}
 
 .offset_menu .parent {
     margin: auto;
@@ -1014,13 +1016,24 @@ footer .btn_prima {
     font-size: calc(5rem + 3vw);
 }
 
+.offset_menu .prim_menu li {
+    transform-origin: bottom;
+    transform: scaleY(.8);
+    opacity: 0;
+    position: relative;
+    margin-bottom: 8vw;
+}
+
 .offset_menu .prim_menu li:nth-child(1) {
     margin-top: 10rem;
 }
 
-.offset_menu .prim_menu li {
-    margin-bottom: 8vw;
+.offset_menu .prim_menu .clone {
+    display: block;
+    position: absolute;
+    top: 100%;
 }
+
 
 .offset_menu a {
     color: var(--dark);
