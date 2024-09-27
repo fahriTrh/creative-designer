@@ -79,6 +79,10 @@ body {
     position: fixed;
 }
 
+body.about {
+    background-color: var(--light);
+}
+
 body::-webkit-scrollbar {
     width: .6rem;
 }
@@ -723,7 +727,6 @@ button:hover .btn_circle {
     background-color: var(--light);
     position: relative;
     z-index: 10;
-    padding-bottom: 20rem;
 }
 
 .about_container {
@@ -1022,6 +1025,9 @@ footer .btn_prima {
     opacity: 0;
     position: relative;
     margin-bottom: 8vw;
+    overflow: hidden;
+    width: max-content;
+    margin-left: auto;
 }
 
 .offset_menu .prim_menu li:nth-child(1) {
@@ -1032,6 +1038,9 @@ footer .btn_prima {
     display: block;
     position: absolute;
     top: 100%;
+    right: 0;
+    font-family: 'Euphoria Script', sans-serif;
+    font-size: calc(7rem + 3vw);
 }
 
 
@@ -1186,6 +1195,82 @@ footer .btn_prima {
     transform-origin: bottom right;
 }
 
+
+/* about page */
+
+body.about main {
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    background-color: var(--light);
+}
+
+body.about .about_section {
+    width: 90%;
+    margin: auto;
+    /* background: salmon; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+body.about .about_section .card_about_container {
+    border-left: 2px solid var(--light-gray);
+    margin-top: calc(7rem + 1vw);
+}
+
+body.about .about_section h1 {
+    font-size: 15vmax;
+    font-weight: 100;
+    margin-top: 12rem;
+}
+
+body.about .about_section h1, body.about .sub_heading {
+    text-align: center;
+}
+
+body.about .card_content {
+    border-left: 2px solid var(--dark);
+    padding-left: calc(3rem + .5vw);
+    margin-bottom: 4rem;
+    max-width: 45rem;
+}
+
+body.about .card_content .sub_heading {
+    text-transform: none;
+    text-align: start;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+body.about .card_content p {
+    margin-top: 1.5rem;
+}
+
+body.about .image_content {
+    width: 100%;
+    height: 50rem;
+    position: relative;
+}
+
+body.about .image_content .profile_image {
+    width: 100%;
+    height: 100%;
+    background-color: salmon;
+    position: absolute;
+    /* background-size: cover;
+    background-position: center; */
+    object-fit: cover;
+    object-position: center;
+}
+
+body.about .image_content .profile_image:nth-child(2) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    background-color: red;
+}
+
+/* end about page */
+
 @keyframes spinner {
     0% {
         transform: rotate(0deg);
@@ -1199,6 +1284,16 @@ footer .btn_prima {
 @media (min-width: 479px) {
     .buttons {
         flex-direction: row;
+    }
+
+    body.about .image_content {
+        width: 55%;
+        height: 35rem;
+    }
+    
+    body.about .image_content .profile_image {
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -1310,6 +1405,7 @@ footer .btn_prima {
 
     .offset_menu .prim_menu li {
         margin-bottom: 3vw;
+        margin-left: 0;
     }
 }
 
@@ -1462,6 +1558,10 @@ footer .btn_prima {
         text-align: start;
     }
 
+    .offset_menu .prim_menu .clone {
+        left: 0;
+    }
+
     .offset_menu .sub_menu {
         display: flex;
         position: absolute;
@@ -1471,11 +1571,53 @@ footer .btn_prima {
         right: 0;
         transform: translate(130%);
         background-color: var(--light);
-        
+    }
+
+    /* about page */
+    body.about .about_section h1, body.about .sub_heading {
+        text-align: start;
+    }
+
+    body.about .sub_heading {
+        font-size: clamp(1.8rem, 1.5rem + 1.50vw, 2rem);
+    }
+
+    body.about .about_section {
+        flex-direction: row;
+        gap: 3rem;
+        justify-content: space-between;
+        align-items: start;
+        position: relative;
+        padding-bottom: 0;
+        margin-bottom: 30rem;
+    }
+
+    body.about .text_content {
+        position: relative;
+    }
+
+    body.about .about_section .image_content {
+        height: 85vh;
+        width: 50vw;
+        margin-top: 7.5vh;
+    }
+
+    body.about .card_content {
+        max-width: 40rem;
+    }
+    /* end about page */
+}
+
+@media (min-width: 960px) {
+    body.about .about_section .image_content {
+        height: 100vh;
+        width: 43vw;
+        margin-top: 0;
     }
 }
 
 @media (min-width: 992px) {
+
     .hero_content {
         margin-top: 11vw;
     }
@@ -1544,6 +1686,15 @@ footer .btn_prima {
     .offset_menu .prim_menu li {
         margin-bottom: 2vw;
     }
+
+    /* about page */
+    body.about .about_section {
+        width: 80%;
+    }
+    body.about .about_section .image_content {
+        width: 40vw;
+    }
+    /* end about page */
 }
 
 @media (min-width: 1200px) {
@@ -1563,4 +1714,13 @@ footer .btn_prima {
     .offset_menu .prim_menu li {
         margin-bottom: 1.5vw;
     }
+
+    /* about page */
+    body.about .about_section {
+        width: 75%;
+    }
+    body.about .about_section .image_content {
+        width: 35vw;
+    }
+    /* end about page */
 }

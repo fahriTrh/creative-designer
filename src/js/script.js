@@ -12,7 +12,7 @@ gsap.ticker.lagSmoothing(0)
 
 // view cursor
 const view_cursor = document.querySelector('.view_cursor')
-var demo = new CircleType(view_cursor)
+let circle = new CircleType(view_cursor)
 
 // end cursor
 
@@ -37,7 +37,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['nav .logo', '.menu_icon', '.btn_prima', '.btn_second', '.link', '.prim_menu a'];
+const hoverable_elements = ['nav .logo', '.menu_icon', '.btn_prima', '.btn_second', '.link'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -376,12 +376,12 @@ function setSectionThreePos() {
 
 // work section interactifity
 
-const numbers = document.querySelectorAll('.work_number p')
-let text = null
+// const numbers = document.querySelectorAll('.work_number p')
+// let text = null
 
-numbers.forEach(number => {
-    text = new SplitType(number, {types: 'chars'})
-})
+// numbers.forEach(number => {
+//     text = new SplitType(number, {types: 'chars'})
+// })
 
 const home_work_column = document.querySelectorAll('.home_work_column')
 
@@ -804,3 +804,80 @@ function convexMenuPosition() {
 }
 
 // end animation for menu
+
+
+// animation for primary menu
+
+// const primaryMenu = document.querySelectorAll('.offset_menu .prim_menu a')
+const containers = document.querySelectorAll('.offset_menu .prim_menu li')
+// let textTo = new SplitType(primaryMenu, {types: 'chars'});
+
+containers.forEach(container => {
+    let text = container.querySelectorAll('a')
+    text = new SplitType(text, {types: 'chars'});
+    const view_cursor = document.querySelector('.view_cursor')
+    
+    container.addEventListener('mouseenter', function() {
+        gsap.killTweensOf(text.chars)
+        gsap.killTweensOf(view_cursor)
+        gsap.killTweensOf('.custom_cursor_wrap')
+        gsap.to(text.chars, {
+            y: '-100%',
+            stagger: 0.1,
+            ease: 'in',
+            duration: .3,
+            delay: .1
+        });
+
+        gsap.to('.custom_cursor_wrap', {
+            scale: 2,
+            duration: .3
+        })
+
+        gsap.set('.custom_cursor_wrap', {
+            opacity: 0
+        })
+
+        view_cursor.innerHTML = 'view → the → page → view → the → page →'
+        let circle = new CircleType(view_cursor)
+
+        gsap.to(view_cursor , {
+            opacity: 1,
+            duration: .5
+        })
+        
+    })
+
+    container.addEventListener('mouseleave', function() {
+        gsap.killTweensOf(text.chars)
+        gsap.killTweensOf(view_cursor)
+        gsap.killTweensOf('.custom_cursor_wrap')
+        let reversedText = Array.from(text.chars).reverse()
+        gsap.to(reversedText, {
+            y: '0%',
+            stagger: 0.1,
+            ease: 'in',
+            duration: .3,
+            delay: .1
+        });
+
+        gsap.to('.custom_cursor_wrap', {
+            scale: 1,
+            duration: .3
+        })
+
+        gsap.set('.custom_cursor_wrap', {
+            opacity: 1
+        })
+
+        view_cursor.innerHTML = 'view → the → case → view → the → case →'
+        let circle = new CircleType(view_cursor)
+
+        gsap.set(view_cursor , {
+            opacity: 0
+        })
+    })
+})
+
+
+// end animation for primary menu
