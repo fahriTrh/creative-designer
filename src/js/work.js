@@ -1,3 +1,17 @@
+gsap.registerPlugin(ScrollTrigger)
+
+const lenis = new Lenis()
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time)=>{
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
+
+
+
 // animation for pre load 
 
 window.requestAnimationFrame(convexLoadPosition)
@@ -320,3 +334,19 @@ containers.forEach(container => {
 
 
 // end animation for primary menu
+
+
+const works = document.querySelectorAll('.work_container .work_card')
+
+works.forEach(work => {
+    gsap.to(work, {
+        scrollTrigger: {
+            trigger: works,
+            scrub: true,
+            markers: true,
+            start: 'top center',
+            start: 'bottom center',
+            pin: '.card_desk'
+        }
+    })
+})

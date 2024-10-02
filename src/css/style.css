@@ -1363,14 +1363,65 @@ body.work main {
 body.work .work_page_section {
     width: 80%;
     margin: auto;
+    padding-top: 15rem;
 }
 
 body.work .work_container {
     width: 100%;
 }
 
-body.work .work_about h2 {
-    
+body.work .work_about {
+    text-align: center;
+}
+
+.work .work_card h2 {
+    font-size: clamp(3rem, 2.9rem + 1.36vw, 4rem);
+    font-weight: 100;
+    letter-spacing: .1rem;
+}
+
+.work .work_card h3 {
+    font-size: clamp(1.58rem, 1.308rem + 1.36vw, 1.8rem);
+    font-weight: 100;
+    word-spacing: .3rem;
+    letter-spacing: .1rem;
+    margin-top: .7rem;
+    text-transform: uppercase;
+}
+
+.work .work_about p {
+    font-size: 1.4rem;
+    line-height: 1.6em;
+    letter-spacing: .11em;
+    font-weight: 100;
+    color: var(--charcoal);
+    margin-top: 2.3rem;
+}
+
+.work .work_card {
+    padding-bottom: 14rem;
+}
+
+.work .work_card .work_image {
+    width: 100%;
+    height: calc(30vmax + 3vw);
+    margin-bottom: calc(3rem + 1vw);
+    overflow: hidden;
+    position: relative;
+}
+
+.work .work_card .work_image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--dark);
+}
+
+.work .work_card .work_image img:nth-child(2) {
+    transform: scale(.5);
 }
 
 /* end work page */
@@ -1523,6 +1574,12 @@ body.work .work_about h2 {
     .about main .cta_container {
         margin-top: 20rem;
     }
+
+    /* work page */
+    body.work .work_page_section {
+        width: 60%;
+    }
+    /* end work page */
 }
 
 @media (min-width: 768px) {
@@ -1727,6 +1784,35 @@ body.work .work_about h2 {
         transform: rotate(0deg);
     }
     /* end about page */
+
+    /* work page */
+    body.work .work_container .work_about {
+        display: none;
+    }
+
+    body.work .work_page_section {
+        width: 90%;
+        display: flex;
+        gap: 3rem;
+    }
+
+    body.work .work_container {
+        width: 60%;
+    }
+    
+    .card_desk {
+        margin-top: calc((30vmax + 3vw) / 5);
+    }
+
+    .card_desk .work_about {
+        max-width: 400px;
+    }
+
+    .work .work_card h2 {
+        font-size: clamp(3.5rem, 3rem + 1.36vw, 6rem);
+    }
+
+    /* end work page */
 }
 
 @media (min-width: 960px) {
@@ -1816,6 +1902,12 @@ body.work .work_about h2 {
         width: 40vw;
     }
     /* end about page */
+
+    /* work page */
+    .card_desk {
+        margin-top: calc((30vmax + 3vw) / 4);
+    }
+    /* end work page */
 }
 
 @media (min-width: 1200px) {
@@ -1844,4 +1936,11 @@ body.work .work_about h2 {
         width: 35vw;
     }
     /* end about page */
+
+    /* work page */
+    body.work .work_page_section {
+        gap: 0;
+        justify-content: space-between;
+    }
+    /* end work page */
 }
