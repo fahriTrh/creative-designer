@@ -190,7 +190,7 @@ nav .menu_icon {
 }
 
 nav .logo {
-    font-size: 1.5rem;
+    font-size: 2rem;
     width: max-content;
     padding: 1rem;
     padding-right: 4rem;
@@ -201,7 +201,7 @@ nav .logo {
 }
 
 .logo .fancy {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .logo div {
@@ -243,8 +243,8 @@ nav .logo {
     width: max-content;
 }
 
-.hero_content .hero_title {
-    font-size: clamp(9vw, 10vw, 11vw);
+.hero_content .hero_title, .contact_header .title {
+    font-size: clamp(8vw, 9vw, 10vw);
     font-weight: 100;
 }
 
@@ -569,7 +569,7 @@ button:hover .btn_circle {
     top: 100%;
 }
 
-.work_name p {
+.home_work .work_name p {
     font-size: clamp(1rem, 1rem + 3vw, 4rem);
     position: relative;
 }
@@ -714,7 +714,7 @@ button:hover .btn_circle {
     bottom: -1rem;
 }
 
-.card_content p, .about_content p {
+.card_content p, .about_content p, .contact_header p {
     font-size: 1.4rem;
     line-height: 1.6em;
     letter-spacing: .11em;
@@ -798,10 +798,6 @@ button:hover .btn_circle {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-}
-
-.cta_fancy .fancy {
-    
 }
 
 .cta_fancy .line {
@@ -1228,7 +1224,7 @@ body.about main {
     position: relative;
 }
 
-body.about main .concave {
+body.about main .concave, body.work main .concave {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1239,7 +1235,6 @@ body.about main .concave {
 body.about .about_section {
     width: 90%;
     margin: auto;
-    /* background: salmon; */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -1296,7 +1291,6 @@ body.about .image_content .profile_image {
 
 body.about .image_content .profile_image:nth-child(2) {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    background-color: red;
 }
 
 .where_lived {
@@ -1358,6 +1352,7 @@ body.work main {
     height: auto;
     min-height: 100vh;
     background-color: var(--light);
+    position: relative;
 }
 
 body.work .work_page_section {
@@ -1372,6 +1367,43 @@ body.work .work_container {
 
 body.work .work_about {
     text-align: center;
+    position: relative;
+    /* background: salmon; */
+}
+
+.card_desk {
+    height: max-content;
+    display: none;
+}
+
+.card_desk.active {
+    z-index: 889;
+}
+
+.card_desk .work_name, .work_sub, .work_text {
+    height: max-content;
+    position: relative;
+    overflow: hidden;
+    /* background: salmon; */
+}
+
+.work_sub {
+    /* background: dodgerblue; */
+    margin-top: .7rem;
+    margin-bottom: 2.3rem;
+}
+
+.work_text {
+    /* background: tomato; */
+}
+
+.card_desk .work_name h2, .work_sub h3, .work_text p {
+    position: absolute;
+    width: 100%;
+}
+
+.card_desk .work_name h2:nth-child(1), .work_sub h3:nth-child(1), .work_text p:nth-child(1) {
+    position: relative;
 }
 
 .work .work_card h2 {
@@ -1385,7 +1417,6 @@ body.work .work_about {
     font-weight: 100;
     word-spacing: .3rem;
     letter-spacing: .1rem;
-    margin-top: .7rem;
     text-transform: uppercase;
 }
 
@@ -1395,7 +1426,6 @@ body.work .work_about {
     letter-spacing: .11em;
     font-weight: 100;
     color: var(--charcoal);
-    margin-top: 2.3rem;
 }
 
 .work .work_card {
@@ -1406,7 +1436,6 @@ body.work .work_about {
     width: 100%;
     height: calc(30vmax + 3vw);
     margin-bottom: calc(3rem + 1vw);
-    overflow: hidden;
     position: relative;
 }
 
@@ -1417,14 +1446,91 @@ body.work .work_about {
     top: 0;
     object-fit: cover;
     object-position: center;
-    border: 1px solid var(--dark);
 }
 
 .work .work_card .work_image img:nth-child(2) {
     transform: scale(.5);
 }
 
+.work_arrow {
+    height: 15rem;
+    position: absolute;
+    left: 48%;
+    padding: 1rem;
+    color: var(--dark);
+    cursor: none;
+}
+
+.work_arrow svg {
+    pointer-events: none;
+}
+
+.work_arrow.is_top {
+    transform: rotate(180deg);
+    top: -16rem;
+    display: none;
+}
+
+.work_arrow.is_bottom {
+    bottom: -3rem;
+}
+
+.work_sub h3:nth-child(1) {
+    color: #df3b2e;
+}
+
+.work_sub h3:nth-child(2) {
+    color: #ab8258;
+}
+
+.work_sub h3:nth-child(3) {
+    color: #fc6564;
+}
+
+.work_sub h3:nth-child(4) {
+    color: #4ae0ba;
+}
+
 /* end work page */
+
+
+/* contact page */
+
+body.contact main {
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.contact .contact_layout {
+    width: 85%;
+    margin: auto;
+    height: auto;
+}
+
+.contact_layout .contact_header {
+    padding-top: calc(10rem + 5vw);
+}
+
+.contact_body {
+    margin-top: 4rem;
+}
+
+.contact_body .sub_title {
+    font-size: clamp(3.5vw, 4.5vw, 5.5vw);
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    gap: 1.3vw;
+}
+
+.sub_title .fancy {
+    font-size: clamp(4vw, 5vw, 6vw);
+    display: block;
+}
+
+/* end contact page */
 
 @keyframes spinner {
     0% {
@@ -1470,7 +1576,7 @@ body.work .work_about {
         gap: 8px;
     }
     
-    .hero_content .hero_title {
+    .hero_content .hero_title, .contact_header .title {
         font-size: clamp(6vw, 7vw, 8vw);
         font-weight: 100;
         line-height: 9vw;
@@ -1580,6 +1686,13 @@ body.work .work_about {
         width: 60%;
     }
     /* end work page */
+
+    /* contact page */
+    .contact_header .title {
+        font-size: clamp(5.5vw, 6.5vw, 7.5vw);
+        line-height: 8.5vw;
+    }
+    /* end contact page */
 }
 
 @media (min-width: 768px) {
@@ -1634,7 +1747,7 @@ body.work .work_about {
         font-size: clamp(4.58rem, 3.308rem + 4.36vw, 7.03rem);
     }
 
-    .work_name p {
+    .home_work .work_name p {
         font-size: clamp(1rem, 1rem + 2vw, 3rem);
     }
 
@@ -1693,6 +1806,14 @@ body.work .work_about {
 
     .about_content p {
         margin-top: 1rem;
+    }
+
+    .contact_header p {
+        margin-top: calc(3.5rem + .5vw);
+    }
+    
+    .contact_body {
+        margin-top: calc(5rem + .5vw);
     }
 
     footer .footer_content {
@@ -1797,15 +1918,23 @@ body.work .work_about {
     }
 
     body.work .work_container {
+        /* width: calc(45% + 3vw); */
         width: 60%;
     }
+
+    /* .work_card {
+        display: flex;
+        gap: 3rem;
+    } */
     
     .card_desk {
-        margin-top: calc((30vmax + 3vw) / 5);
+        position: sticky;
+        display: block;
     }
 
-    .card_desk .work_about {
+    .work_about {
         max-width: 400px;
+        margin-top: 10%;
     }
 
     .work .work_card h2 {
@@ -1813,6 +1942,16 @@ body.work .work_about {
     }
 
     /* end work page */
+
+    /* contact page */
+    .contact .contact_layout {
+        width: 80%;
+    }
+
+    .contact_header {
+        padding-top: calc(8rem + 5vw);
+    }
+    /* end contact page */
 }
 
 @media (min-width: 960px) {
@@ -1820,6 +1959,14 @@ body.work .work_about {
         height: 100vh;
         width: 43vw;
         margin-top: 0;
+    }
+
+    body.work .work_container {
+        /* width: 60%; */
+    }
+
+    .contact .contact_layout {
+        width: 70%;
     }
 }
 
@@ -1905,9 +2052,18 @@ body.work .work_about {
 
     /* work page */
     .card_desk {
-        margin-top: calc((30vmax + 3vw) / 4);
+        margin-top: calc((30vmax + 3vw) / 5);
+    }
+
+    .work_arrow.is_top {
+        top: -14rem;
     }
     /* end work page */
+
+
+    /* contact page */
+
+    /* end contact page */
 }
 
 @media (min-width: 1200px) {
@@ -1942,5 +2098,18 @@ body.work .work_about {
         gap: 0;
         justify-content: space-between;
     }
+
+    .work_card {
+        gap: 0;
+        justify-content: space-between;
+    }
     /* end work page */
+
+    /* contact page */
+
+    .contact .contact_layout {
+        width: 60%;
+    }
+
+    /* end contact page */
 }

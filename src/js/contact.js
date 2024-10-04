@@ -10,6 +10,7 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
+
 // interactivity for logo
 const logo = document.querySelector('.logo')
 
@@ -77,6 +78,7 @@ logo.addEventListener('mouseleave', () => {
 })
 // end interactivity for logo
 
+
 // animation for pre load 
 
 window.requestAnimationFrame(convexLoadPosition)
@@ -99,6 +101,8 @@ window.addEventListener("load", function() {
 function onLoadedAnim() {
 
     const rotates = document.querySelectorAll('.pre_load .logo .rotate')
+    const heroText = document.querySelectorAll('.hText');
+    const buttons = document.querySelectorAll('.buttons button')
     const pre_load_height = document.querySelector('.pre_load').getBoundingClientRect().height
     
     // rotates.forEach(rotate => {
@@ -140,103 +144,26 @@ function onLoadedAnim() {
             }
         })
     // })
+
+    gsap.from(heroText, {
+        y: 100,
+        rotateX: -75,
+        rotate: -3,
+        stagger: 0.1,
+        delay: 2.3,
+        opacity: 0
+    });
+
+    gsap.from(buttons, {
+        delay: 2.8,
+        duration: 1,
+        y: 100,
+        opacity: 0,
+        stagger: 0.1
+    })
 }
 
 // end animation for pre load
-
-// interactivity for logo
-const logo = document.querySelector('.logo')
-
-let secondLine = logo.children[1].firstElementChild
-let secondHeading = logo.children[1].lastElementChild
-
-let firstLine = logo.children[0].firstElementChild
-let firstHeading = logo.children[0].lastElementChild
-
-gsap.set(secondLine, {
-    right: '60%',
-})
-
-gsap.set(secondHeading, {
-    x: '50%'
-})
-
-logo.addEventListener('mouseenter', () => {
-    gsap.to(secondLine, {
-        right: '100%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-    gsap.to(secondHeading, {
-        x: 0,
-        duration: .3,
-        ease: 'power3.in'
-    })
-
-    gsap.to(firstLine, {
-        right: '60%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-    gsap.to(firstHeading, {
-        x: '50%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-})
-
-logo.addEventListener('mouseleave', () => {
-    gsap.to(secondLine, {
-        right: '60%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-    
-    gsap.to(secondHeading, {
-        x: '50%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-
-    gsap.to(firstLine, {
-        right: '100%',
-        duration: .3,
-        ease: 'power3.in'
-    })
-    gsap.to(firstHeading, {
-        x: 0,
-        duration: .3,
-        ease: 'power3.in'
-    })
-})
-// end interactivity for logo
-
-// interactivity for menu
-const menu = document.querySelector('.menu_icon')
-const lines = menu.querySelectorAll('.wrap .line')
-
-menu.addEventListener('mouseenter', function() {
-    gsap.to(menu.querySelector('.wrap'), {
-        left: '20%',
-        right: '20%',
-        duration: .2,
-        ease: 'in',
-        backgroundColor: 'white' 
-    })
-    
-})
-
-menu.addEventListener('mouseleave', function() {
-    gsap.to(menu.querySelector('.wrap'), {
-        left: 0,
-        right: 0,
-        duration: .2,
-        ease: 'in',
-        backgroundColor: 'rgb(239, 236, 236)'
-    })
-    
-})
-// end interactivity for menu
 
 
 // mouse interactifity
@@ -264,7 +191,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['nav .logo', '.menu_icon', '.btn_prima', '.btn_second', '.link'];
+const hoverable_elements = ['nav .logo', '.menu_icon', '.link', '.work_arrow'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -313,6 +240,7 @@ hoverable_elements.forEach(selector => {
     })
 });
 // end mouse interactifity
+
 
 // animation for menu
 document.querySelector('.menu_icon').addEventListener('click', function() {
@@ -473,71 +401,3 @@ containers.forEach(container => {
 
 
 // end animation for primary menu
-
-
-const aboutSection = document.querySelector('.about_section')
-
-// create
-let mm = gsap.matchMedia();
-
-mm.add("(min-width: 768px)", () => {
-
-    gsap.to('.image_content', {
-        scrollTrigger: {
-            trigger: '.about_section',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: true,
-            pin: '.image_content'
-        }
-    })
-
-});
-
-const profileImage = document.querySelectorAll('.profile_image')
-
-gsap.to(profileImage[1], {
-    clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
-    scrollTrigger: {
-        trigger: profileImage[1],
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-    }
-})
-
-// concave cta
-
-window.requestAnimationFrame(concaveMainPosition)
-
-window.addEventListener('resize', concaveMainPosition)
-
-gsap.to(document.querySelector('main .concave path'), {
-    attr: {
-        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
-    },
-    ease: 'in',
-    scrollTrigger: {
-        trigger: 'main .concave',
-        start: 'top center',
-        end: 'top top',
-        scrub: true
-    }
-})
-
-function concaveMainPosition() {
-    const main = document.querySelector('main')
-    const concave = main.querySelector('.concave')
-
-    let concave_height = concave.getBoundingClientRect().height
-
-    
-    gsap.set(concave, {
-        bottom: (concave_height - 1) * -1
-    })
-
-    gsap.set('footer', {
-        marginTop: concave_height / 2
-    })
-}
-// end concave cta

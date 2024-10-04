@@ -10,7 +10,72 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
+// interactivity for logo
+const logo = document.querySelector('.logo')
 
+let secondLine = logo.children[1].firstElementChild
+let secondHeading = logo.children[1].lastElementChild
+
+let firstLine = logo.children[0].firstElementChild
+let firstHeading = logo.children[0].lastElementChild
+
+gsap.set(secondLine, {
+    right: '60%',
+})
+
+gsap.set(secondHeading, {
+    x: '50%'
+})
+
+logo.addEventListener('mouseenter', () => {
+    gsap.to(secondLine, {
+        right: '100%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+    gsap.to(secondHeading, {
+        x: 0,
+        duration: .3,
+        ease: 'power3.in'
+    })
+
+    gsap.to(firstLine, {
+        right: '60%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+    gsap.to(firstHeading, {
+        x: '50%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+})
+
+logo.addEventListener('mouseleave', () => {
+    gsap.to(secondLine, {
+        right: '60%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+    
+    gsap.to(secondHeading, {
+        x: '50%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+
+    gsap.to(firstLine, {
+        right: '100%',
+        duration: .3,
+        ease: 'power3.in'
+    })
+    gsap.to(firstHeading, {
+        x: 0,
+        duration: .3,
+        ease: 'power3.in'
+    })
+})
+// end interactivity for logo
 
 // animation for pre load 
 
@@ -124,7 +189,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['nav .logo', '.menu_icon', '.btn_prima', '.btn_second', '.link'];
+const hoverable_elements = ['nav .logo', '.menu_icon', '.link', '.work_arrow'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -178,6 +243,12 @@ hoverable_elements.forEach(selector => {
 // animation for menu
 document.querySelector('.menu_icon').addEventListener('click', function() {
 
+    const cardDesk = document.querySelector('.card_desk')
+    
+    if (cardDesk.classList.contains('active')) {
+        cardDesk.classList.remove('active')
+    }
+
     const tl = gsap.timeline()
     
     if (this.classList.contains('active')) {
@@ -209,6 +280,10 @@ document.querySelector('.menu_icon').addEventListener('click', function() {
         }, 1)
         tl.to('.offset_menu .convex', {opacity: 0, delay: .8}, 1)
         this.classList.remove('active')
+
+        setTimeout(() => {
+            cardDesk.classList.add('active')
+        }, 2000);
     } else {
         gsap.killTweensOf('.offset_menu .sub_menu');
         gsap.killTweensOf('.offset_menu');
@@ -336,17 +411,222 @@ containers.forEach(container => {
 // end animation for primary menu
 
 
-const works = document.querySelectorAll('.work_container .work_card')
+// set card desk position
 
-works.forEach(work => {
-    gsap.to(work, {
-        scrollTrigger: {
-            trigger: works,
-            scrub: true,
-            markers: true,
-            start: 'top center',
-            start: 'bottom center',
-            pin: '.card_desk'
-        }
+setCardDesk()
+
+function setCardDesk() {
+    const cardDesk = document.querySelector('.card_desk')
+    const elementPosition = cardDesk.getBoundingClientRect().top + window.scrollY
+
+    gsap.set(cardDesk, {top: elementPosition})
+}
+
+// end set card desk position
+
+
+// function for card contents position
+
+cardContentsPos('.work_text p')
+cardContentsPos('.work_sub h3')
+cardContentsPos('.card_desk .work_name h2')
+
+function cardContentsPos(elements) {
+    contents = document.querySelectorAll(elements)
+
+    contents.forEach((content, i) => {
+        gsap.set(content, {
+            top: () => 100 * i + '%'
+        })
     })
+}
+// end function for card contents position
+
+
+// animation on card scroll
+
+const mm = gsap.matchMedia()
+
+mm.add('(min-width: 768px)', function() {
+    
+    let currentY = 0;
+
+    let currentCard = 1;
+    
+    const works = document.querySelectorAll('.work_container .work_card');
+    
+    works.forEach(work => {
+        gsap.to('.moveY', {
+            y: `${currentY}%`,
+            scrollTrigger: {
+                trigger: work,
+                start: 'center top',
+                end: 'bottom top',
+                onEnter: () => {
+                    currentY -= 100;
+                    currentCard += 1
+
+                    if (currentCard < works.length) {
+                        gsap.set('.is_bottom', {display: 'block'})
+                        gsap.set('.is_bottom', {
+                            attr: {
+                                href: '#' + works[currentCard].id
+                            }
+                        })
+                    } else {
+                        gsap.set('.is_bottom', {display: 'none'})
+                    }
+
+                    if (currentCard > 1) {
+                        gsap.set('.is_top', {display: 'block'})
+
+                        gsap.set('.is_top', {
+                            attr: {
+                                href: '#' + works[currentCard - 2].id
+                            }
+                        })
+                    } else {
+                        gsap.set('.is_top', {display: 'none'})
+                    }
+
+                    gsap.to('.moveY', { y: `${currentY}%`, duration: 0.5, stagger: .01, ease: 'in' });
+                },
+                onLeaveBack: () => {
+                    currentY += 100;
+                    currentCard -= 1
+
+                    if (currentCard < works.length) {
+                        gsap.set('.is_bottom', {display: 'block'})
+                        gsap.set('.is_bottom', {
+                            attr: {
+                                href: '#' + works[currentCard].id
+                            }
+                        })
+                    } else {
+                        gsap.set('.is_bottom', {display: 'none'})
+                    }
+
+                    if (currentCard > 1) {
+                        gsap.set('.is_top', {display: 'block'})
+
+                        gsap.set('.is_top', {
+                            attr: {
+                                href: '#' + works[currentCard - 2].id
+                            }
+                        })
+                    } else {
+                        gsap.set('.is_top', {display: 'none'})
+                    }
+
+                    gsap.to('.moveY', { y: `${currentY}%`, duration: 0.5, stagger: .01, ease: 'in' });
+                }
+            }
+        });
+    });
+
 })
+
+
+// end animation on card scroll
+
+
+document.querySelectorAll('a[href^="#"]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = el.getAttribute('href')?.slice(1);
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (target) {
+            // Hitung posisi target dan offset
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            const offset = 15 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 15 rem dalam pixel
+            const scrollToPosition = targetPosition - offset; // Mengurangi offset dari posisi target
+
+            // Scroll ke posisi yang dihitung
+            window.scrollTo({
+                top: scrollToPosition,
+                behavior: 'smooth' // Mengatur scroll menjadi smooth
+            });
+        }
+        
+    });
+});
+
+
+
+
+window.requestAnimationFrame(concaveMainPosition)
+
+window.addEventListener('resize', concaveMainPosition)
+
+gsap.to(document.querySelector('main .concave path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: 'main .concave',
+        start: 'top center',
+        end: 'top top',
+        scrub: true
+    }
+})
+
+function concaveMainPosition() {
+    const main = document.querySelector('main')
+    const concave = main.querySelector('.concave')
+
+    let concave_height = concave.getBoundingClientRect().height
+
+    
+    gsap.set(concave, {
+        bottom: (concave_height - 1) * -1
+    })
+
+    gsap.set('footer', {
+        marginTop: concave_height / 2
+    })
+}
+
+
+
+
+// interactifity for image
+
+const cards = document.querySelectorAll('.work_image')
+
+cards.forEach(card => {
+    const images = card.querySelectorAll('img'); // Memilih semua gambar di dalam work_image
+
+    images.forEach((image, index) => {
+        // Gambar pertama lebih lambat, gambar kedua lebih cepat
+        const duration = 0.5 - index * 0.1; // Durasi lebih singkat, tapi gambar pertama tetap lebih lambat
+        const xTo = gsap.quickTo(image, 'x', {duration: duration, ease: 'power1.out'}); // Easing yang lebih halus
+        const yTo = gsap.quickTo(image, 'y', {duration: duration, ease: 'power1.out'});
+
+        card.addEventListener('mousemove', function(e) {
+            let {clientX, clientY} = e;
+            let {width, height, left, top} = card.getBoundingClientRect();
+
+            // Mengurangi jarak pergerakan untuk efek yang lebih halus
+            let x = (clientX - (left + width / 2)) / 10; // Mengurangi intensitas pergerakan
+            let y = (clientY - (top + height / 2)) / 10;
+
+            // Gerakan gambar dengan durasi yang berbeda sesuai index
+            xTo(x);
+            yTo(y);
+        });
+
+        card.addEventListener('mouseleave', function() {
+            // Kembalikan posisi gambar ke titik nol dengan durasi yang berbeda
+            xTo(0);
+            yTo(0);
+        });
+    });
+});
+
+
+
+
+
+// end interactifity for image
