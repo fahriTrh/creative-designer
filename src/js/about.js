@@ -435,15 +435,30 @@ mm.add("(min-width: 768px)", () => {
 
 const profileImage = document.querySelectorAll('.profile_image')
 
-gsap.to(profileImage[1], {
-    clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
-    scrollTrigger: {
-        trigger: profileImage[1],
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-    }
-})
+mm.add("(min-width: 576px)", () => {
+    gsap.to(profileImage[1], {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
+        scrollTrigger: {
+            trigger: profileImage[1],
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+        }
+    })
+});
+
+mm.add("(max-width: 575px)", () => {
+    gsap.to(profileImage[1], {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
+        scrollTrigger: {
+            trigger: profileImage[1],
+            start: 'top center',
+            end: 'bottom top',
+            scrub: true,
+        }
+    })
+});
+
 
 // concave cta
 
