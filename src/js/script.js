@@ -152,6 +152,11 @@ logo.addEventListener('mouseleave', () => {
         ease: 'power3.in'
     })
 })
+
+logo.addEventListener('click', function() {
+    const homeUrl = this.getAttribute('data-home');
+    window.location.href = homeUrl
+});
 // end interactivity for logo
 
 // interactivity for menu
@@ -182,21 +187,21 @@ menu.addEventListener('mouseleave', function() {
 // end interactivity for menu
 
 
-// interactivity for hero buttons
+// interactivity buttons
 
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     
-    const xTo = gsap.quickTo(button, 'x', {duration: 0.4, ease: 'elastic.out(0.3, 0.1)'});
-    const yTo = gsap.quickTo(button, 'y', {duration: 0.4, ease: 'elastic.out(0.3, 0.1)'});
+    const xTo = gsap.quickTo(button, 'x', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
+    const yTo = gsap.quickTo(button, 'y', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
     
     button.addEventListener('mousemove', function(e) {
         let {clientX, clientY} = e;
         let {width, height, left, top} = button.getBoundingClientRect();
         
-        let x = clientX - (left + width / 2);
-        let y = clientY - (top + height / 2);
+        let x = (clientX - (left + width / 2)) * 0.3;  // Reduced movement scale
+        let y = (clientY - (top + height / 2)) * 0.3;  // Reduced movement scale
     
         xTo(x);
         yTo(y);
@@ -206,9 +211,19 @@ buttons.forEach((button) => {
         xTo(0);
         yTo(0);
     });
+
+    button.addEventListener('click', function() {
+        const pageUrl = this.getAttribute('data-page')
+
+        if (pageUrl) {
+            window.location.href = pageUrl
+        }
+    })
+    
 });
 
-// end interactivity for hero buttons
+
+// end interactivity buttons
 
 
 
@@ -460,6 +475,10 @@ home_work_column.forEach(column => {
             opacity: 0
         })
     });
+
+    column.addEventListener('click', function() {
+        window.location.href = this.getAttribute('data-id')
+    })
 });
 
 const home_work_visuals = document.querySelectorAll('.home_work_visual')
@@ -881,3 +900,28 @@ containers.forEach(container => {
 
 
 // end animation for primary menu
+
+
+
+// smooth transition link
+document.querySelectorAll('a[href^="#"]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = el.getAttribute('href')?.slice(1);
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (target) {
+            // Hitung posisi target dan offset
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+            const scrollToPosition = targetPosition; // Mengurangi offset dari posisi target
+
+            // Scroll ke posisi yang dihitung
+            window.scrollTo({
+                top: scrollToPosition,
+                behavior: 'smooth' // Mengatur scroll menjadi smooth
+            });
+        }
+        
+    });
+});
+// end smooth transition link

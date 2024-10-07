@@ -75,6 +75,11 @@ logo.addEventListener('mouseleave', () => {
         ease: 'power3.in'
     })
 })
+
+logo.addEventListener('click', function() {
+    const homeUrl = this.getAttribute('data-home');
+    window.location.href = homeUrl
+});
 // end interactivity for logo
 
 // animation for pre load 
@@ -624,9 +629,40 @@ cards.forEach(card => {
         });
     });
 });
-
-
-
-
-
 // end interactifity for image
+
+
+// interactivity for buttons
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    
+    const xTo = gsap.quickTo(button, 'x', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
+    const yTo = gsap.quickTo(button, 'y', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
+    
+    button.addEventListener('mousemove', function(e) {
+        let {clientX, clientY} = e;
+        let {width, height, left, top} = button.getBoundingClientRect();
+        
+        let x = (clientX - (left + width / 2)) * 0.3;  // Reduced movement scale
+        let y = (clientY - (top + height / 2)) * 0.3;  // Reduced movement scale
+    
+        xTo(x);
+        yTo(y);
+    });
+    
+    button.addEventListener('mouseleave', function() {
+        xTo(0);
+        yTo(0);
+    });
+
+    button.addEventListener('click', function() {
+        const pageUrl = this.getAttribute('data-page')
+
+        if (pageUrl) {
+            window.location.href = pageUrl
+        }
+    })
+    
+});
+// end interactivity for buttons

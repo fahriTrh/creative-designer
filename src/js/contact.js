@@ -76,6 +76,11 @@ logo.addEventListener('mouseleave', () => {
         ease: 'power3.in'
     })
 })
+
+logo.addEventListener('click', function() {
+    const homeUrl = this.getAttribute('data-home');
+    window.location.href = homeUrl
+});
 // end interactivity for logo
 
 
@@ -191,7 +196,7 @@ window.addEventListener('mousemove', (e) => {
     })
 })
 
-const hoverable_elements = ['nav .logo', '.menu_icon', '.link', '.work_arrow'];
+const hoverable_elements = ['nav .logo', '.menu_icon', '.link', '.work_arrow', '.btn_input'];
 
 hoverable_elements.forEach(selector => {
     let elements = document.querySelectorAll(selector);
@@ -401,3 +406,185 @@ containers.forEach(container => {
 
 
 // end animation for primary menu
+
+
+inputFocus('.input_wrapper input')
+inputFocus('.input_wrapper textarea')
+
+function inputFocus(elements) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll(elements);
+        
+        inputs.forEach(input => {
+            const label = input.previousElementSibling;
+    
+            input.addEventListener('focus', () => {
+                label.classList.add('floating');
+            });
+    
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                    label.classList.remove('floating');
+                }
+            });
+    
+            if (input.value !== '') {
+                label.classList.add('floating');
+            }
+        });
+    });
+}
+
+
+// btn input interactivity
+
+const allBtnInput = document.querySelectorAll('.btn_input')
+
+allBtnInput.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const btCircle = btn.querySelector('.btn_circle')
+        const input = btn.nextElementSibling
+        
+        if (!input.checked) {
+
+            if (input.type == 'radio') {
+                gsap.set('.budged .btn_circle', {top: '-200%'})
+            }
+
+            gsap.to(btCircle, {
+                top: '-50%'
+            })
+
+        } else {
+            gsap.to(btCircle, {
+                top: ' -200%'
+            })
+        }
+
+        input.checked = !input.checked
+    })
+})
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    
+    const xTo = gsap.quickTo(button, 'x', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
+    const yTo = gsap.quickTo(button, 'y', {duration: 0.3, ease: 'elastic.out(0.2, 0.08)'});  // Adjusted easing
+    
+    button.addEventListener('mousemove', function(e) {
+        let {clientX, clientY} = e;
+        let {width, height, left, top} = button.getBoundingClientRect();
+        
+        let x = (clientX - (left + width / 2)) * 0.3;  // Reduced movement scale
+        let y = (clientY - (top + height / 2)) * 0.3;  // Reduced movement scale
+    
+        xTo(x);
+        yTo(y);
+    });
+    
+    button.addEventListener('mouseleave', function() {
+        xTo(0);
+        yTo(0);
+    });
+
+    button.addEventListener('click', function() {
+        const pageUrl = this.getAttribute('data-page')
+
+        if (pageUrl) {
+            window.location.href = pageUrl
+        }
+    })
+    
+});
+
+// end btn input interactivity
+
+// concave position
+window.requestAnimationFrame(concaveMainPosition)
+
+window.addEventListener('resize', concaveMainPosition)
+
+gsap.to(document.querySelector('main .concave path'), {
+    attr: {
+        d: 'm 1 1 v 331.5 h 1440 v -331.5 c -562 3 -860 3 -1440 0 z'
+    },
+    ease: 'in',
+    scrollTrigger: {
+        trigger: 'main .concave',
+        start: 'top center',
+        end: 'top top',
+        scrub: true
+    }
+})
+
+function concaveMainPosition() {
+    const main = document.querySelector('main')
+    const concave = main.querySelector('.concave')
+
+    let concave_height = concave.getBoundingClientRect().height
+
+    
+    gsap.set(concave, {
+        bottom: (concave_height - 1) * -1
+    })
+
+    gsap.set('footer', {
+        marginTop: concave_height / 2
+    })
+}
+// end concave position
+
+
+// btn submit interactivity
+const btnSubmit = document.querySelector('.btn_submit')
+btnSubmit.addEventListener('mouseenter', function() {
+    gsap.killTweensOf(view_cursor)
+    gsap.killTweensOf('.custom_cursor_wrap')
+
+    gsap.to('.custom_cursor_wrap', {
+        scale: 2,
+        duration: .3
+    })
+
+    gsap.set('.custom_cursor_wrap', {
+        opacity: 0
+    })
+
+    view_cursor.innerHTML = 'lets → go → lets → go → lets → go →'
+    let circle = new CircleType(view_cursor)
+
+    gsap.to(view_cursor , {
+        opacity: 1,
+        duration: .5
+    })
+    
+})
+
+btnSubmit.addEventListener('mouseleave', function() {
+    gsap.killTweensOf(view_cursor)
+    gsap.killTweensOf('.custom_cursor_wrap')
+
+    gsap.to('.custom_cursor_wrap', {
+        scale: 1,
+        duration: .3
+    })
+
+    gsap.set('.custom_cursor_wrap', {
+        opacity: 1
+    })
+
+    view_cursor.innerHTML = 'view → the → case → view → the → case →'
+    let circle = new CircleType(view_cursor)
+
+    gsap.set(view_cursor , {
+        opacity: 0
+    })
+})
+// end btn submit interactivity
+
+
+// interactivity for buttons
+
+
+// end interactivity for buttons
