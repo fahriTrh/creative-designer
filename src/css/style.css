@@ -731,9 +731,8 @@ button:hover .btn_circle {
 .service_section {
     position: relative;
     
-    padding-top: 90px;
-    
-    padding-top: 9rem;
+    /* padding-top: 90px;
+    padding-top: 9rem; */
     padding-left: 5%;
     padding-right: 5%;
 }
